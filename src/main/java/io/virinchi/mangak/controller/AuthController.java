@@ -25,6 +25,38 @@ public class AuthController {
 
 
     // =========================================
+    // ROOT PAGE
+    // =========================================
+
+    @GetMapping("/")
+    public String rootPage(
+            HttpSession session
+    ) {
+
+        if (session.getAttribute("userId") != null) {
+
+            Object role =
+                    session.getAttribute("role");
+
+
+            if (role != null &&
+                    "ADMIN".equalsIgnoreCase(
+                            role.toString()
+                    )) {
+
+                return "redirect:/admin/manga/1";
+            }
+
+
+            return "redirect:/mangak";
+        }
+
+
+        return "redirect:/login";
+    }
+
+
+    // =========================================
     // LOGIN PAGE
     // =========================================
 
