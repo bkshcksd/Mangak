@@ -1,0 +1,378 @@
+﻿/* ===========================================
+   SHARED MANGAK NAVBAR
+   Based on search.css
+   =========================================== */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 80px;
+
+    background: #1F2937;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 60px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    z-index: 9999;
+    box-sizing: border-box;
+}
+
+
+/* ===========================================
+   LOGO
+   =========================================== */
+
+.logo a {
+    color: #BCBCBC;
+
+    font-size: 38px;
+
+    font-family: "Jaro", sans-serif;
+
+    letter-spacing: 2px;
+
+    text-decoration: none;
+}
+
+
+/* ===========================================
+   SEARCH
+   =========================================== */
+
+.search-box {
+    width: 420px;
+    height: 45px;
+
+    display: flex;
+
+    margin: 0;
+
+    background: #374151;
+
+    border-radius: 30px;
+
+    overflow: hidden;
+}
+
+
+.search-box input {
+    flex: 1;
+
+    padding: 0 20px;
+
+    background: transparent;
+
+    border: none;
+    outline: none;
+
+    color: #ffffff;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 16px;
+}
+
+
+.search-box input::placeholder {
+    color: #d1d5db;
+}
+
+
+.search-box button {
+    width: 55px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+    transition: 0.2s;
+}
+
+
+.search-box button:hover {
+    background: #4b5563;
+}
+
+
+/* ===========================================
+   NAV LINKS
+   =========================================== */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+
+    gap: 35px;
+}
+
+
+.nav-links a {
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 18px;
+
+    transition: 0.3s;
+}
+
+
+.nav-links a:hover {
+    color: #facc15;
+}
+
+
+/* ===========================================
+   PROFILE
+   =========================================== */
+
+.profile-area {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.username {
+    color: #ffffff;
+
+    font-size: 16px;
+
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+
+.username:hover {
+    color: #facc15;
+}
+
+
+/* ===========================================
+   CATEGORIES DROPDOWN
+   =========================================== */
+
+.nav-dropdown {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+}
+
+
+.nav-dropdown-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #ffffff;
+
+    font-family: "Impact-Regular", Impact, sans-serif;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+.nav-dropdown-button i {
+    font-size: 11px;
+
+    transition: transform 0.2s ease;
+}
+
+
+.nav-dropdown:hover .nav-dropdown-button {
+    color: #facc15;
+}
+
+
+.nav-dropdown:hover .nav-dropdown-button i {
+    transform: rotate(180deg);
+}
+
+
+.nav-dropdown-menu {
+    position: absolute;
+
+    top: calc(100% + 16px);
+    left: 50%;
+
+    width: 220px;
+    max-height: 360px;
+
+    padding: 10px;
+
+    display: none;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+    background: #111827;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 10px;
+
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+
+    overflow-y: auto;
+
+    transform: translateX(-50%);
+
+    z-index: 10000;
+}
+
+
+.nav-dropdown:hover .nav-dropdown-menu {
+    display: flex;
+}
+
+
+.nav-dropdown-menu a {
+    width: 100%;
+
+    padding: 10px 12px;
+
+    box-sizing: border-box;
+
+    border-radius: 7px;
+
+    color: #d1d5db;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 13px;
+
+    text-decoration: none;
+
+    transition: background 0.2s, color 0.2s;
+}
+
+
+.nav-dropdown-menu a:hover {
+    background: #1F2937;
+
+    color: #facc15;
+}
+
+
+.nav-dropdown-menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+
+.nav-dropdown-menu::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+.nav-dropdown-menu::-webkit-scrollbar-thumb {
+    background: #4b5563;
+
+    border-radius: 10px;
+}
+
+
+.nav-dropdown::after {
+    content: "";
+
+    position: absolute;
+
+    top: 100%;
+    left: 0;
+
+    width: 100%;
+    height: 18px;
+}
+
+
+/* ===========================================
+   RESPONSIVE NAVBAR
+   =========================================== */
+
+@media (max-width: 992px) {
+
+    .navbar {
+        height: auto;
+
+        flex-wrap: wrap;
+
+        gap: 15px;
+
+        padding: 15px 20px;
+    }
+
+
+    .search-box {
+        order: 3;
+
+        width: 100%;
+    }
+
+
+    .nav-dropdown-menu {
+        top: calc(100% + 10px);
+
+        width: 200px;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .nav-links {
+        width: 100%;
+
+        justify-content: center;
+
+        gap: 18px;
+    }
+
+
+    .logo a {
+        font-size: 28px;
+    }
+
+
+    .nav-dropdown-button {
+        font-size: 16px;
+    }
+
+
+    .nav-dropdown-menu {
+        left: 0;
+
+        width: 190px;
+
+        transform: none;
+    }
+}
