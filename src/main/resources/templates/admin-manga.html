@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title th:text="'Admin - ' + ${manga.title}">
+        Manga Admin
+    </title>
+
+
+    <link rel="stylesheet"
+          th:href="@{/css/globals.css}">
+
+
+    <link rel="stylesheet"
+          th:href="@{/css/admin-manga.css}">
+
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+<!-- ========================================= -->
+<!-- NAVBAR -->
+<!-- ========================================= -->
+
+<header class="admin-navbar">
+
+
+    <div class="logo">
+
+        <a th:href="@{/mangak}">
+            MANGAK
+        </a>
+
+    </div>
+
+
+    <div class="admin-navbar-right">
+
+
+        <a th:href="@{/manga/{id}(id=${manga.id})}">
+            View Manga
+        </a>
+
+
+        <span th:text="${username}">
+            Username
+        </span>
+
+
+    </div>
+
+
+</header>
+
+
+
+<!-- ========================================= -->
+<!-- PAGE -->
+<!-- ========================================= -->
+
+<main class="admin-page">
+
+
+    <!-- ===================================== -->
+    <!-- HEADER -->
+    <!-- ===================================== -->
+
+    <section class="admin-header">
+
+
+        <a class="back-link"
+           th:href="@{/manga/{id}(id=${manga.id})}">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back to Manga
+
+        </a>
+
+
+        <div class="admin-title">
+
+
+            <img th:src="${manga.coverImage}"
+                 th:alt="${manga.title}">
+
+
+            <div>
+
+
+                <p class="admin-label">
+                    Manga Manager
+                </p>
+
+
+                <h1 th:text="${manga.title}">
+                    Manga Title
+                </h1>
+
+
+                <p>
+                    Manage manga information,
+                    genres, tags, chapters and chapter pages.
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ===================================== -->
+    <!-- EDIT MANGA -->
+    <!-- ===================================== -->
+
+    <section class="admin-panel">
+
+
+        <div class="panel-heading">
+
+
+            <div>
+
+                <h2>
+                    Manga Information
+                </h2>
+
+
+                <p>
+                    Edit the details shown on
+                    the manga page.
+                </p>
+
+            </div>
+
+
+            <i class="fa-solid fa-pen-to-square"></i>
+
+
+        </div>
+
+
+        <form class="manga-form"
+              th:action="@{/admin/manga/{id}/update(id=${adminNumber})}"
+              method="post">
+
+
+            <!-- ================================= -->
+            <!-- TITLE -->
+            <!-- ================================= -->
+
+            <div class="form-group full-width">
+
+                <label for="title">
+                    Title
+                </label>
+
+
+                <input id="title"
+                       type="text"
+                       name="title"
+                       th:value="${manga.title}"
+                       required>
+
+            </div>
+
+
+
+            <!-- ================================= -->
+            <!-- AUTHOR -->
+            <!-- ================================= -->
+
+            <div class="form-group">
+
+                <label for="author">
+                    Author
+                </label>
+
+
+                <input id="author"
+                       type="text"
+                       name="author"
+                       th:value="${manga.author}">
+
+            </div>
+
+
+
+            <!-- ================================= -->
+            <!-- ARTIST -->
+            <!-- ================================= -->
+
+            <div class="form-group">
+
+                <label for="artist">
+                    Artist
+                </label>
+
+
+                <input id="artist"
+                       type="text"
+                       name="artist"
+                       th:value="${manga.artist}">
+
+            </div>
+
+
+
+            <!-- ================================= -->
+            <!-- STATUS -->
+            <!-- ================================= -->
+
+            <div class="form-group">
+
+                <label for="status">
+                    Status
+                </label>
+
+
+                <select id="status"
+                        name="status">
+
+
+                    <option value="ONGOING"
+                            th:selected="${manga.status == 'ONGOING'}">
+                        Ongoing
+                    </option>
+
+
+                    <option value="COMPLETED"
+                            th:selected="${manga.status == 'COMPLETED'}">
+                        Completed
+                    </option>
+
+
+                    <option value="HIATUS"
+                            th:selected="${manga.status == 'HIATUS'}">
+                        Hiatus
+                    </option>
+
+
+                    <option value="CANCELLED"
+                            th:selected="${manga.status == 'CANCELLED'}">
+                        Cancelled
+                    </option>
+
+
+                </select>
+
+            </div>
+
+
+
+            <!-- ================================= -->
+            <!-- DEMOGRAPHIC -->
+            <!-- ================================= -->
+
+            <div class="form-group">
+
+                <label for="demographic">
+                    Demographic
+                </label>
+
+
+                <select id="demographic"
+                        name="demographic">
+
+
+                    <option value="">
+                        Select Demographic
+                    </option>
+
+
+                    <option value="SHOUNEN"
+                            th:selected="${manga.demographic == 'SHOUNEN'}">
+                        Shounen
+                    </option>
+
+
+                    <option value="SEINEN"
+                            th:selected="${manga.demographic == 'SEINEN'}">
+                        Seinen
+                    </option>
+
+
+                    <option value="SHOUJO"
+                            th:selected="${manga.demographic == 'SHOUJO'}">
+                        Shoujo
+                    </option>
+
+
+                    <option value="JOSEI"
+                            th:selected="${manga.demographic == 'JOSEI'}">
+                        Josei
+                    </option>
+
+
+                    <option value="KODOMO"
+                            th:selected="${manga.demographic == 'KODOMO'}">
+                        Kodomo
+                    </option>
+
+
+                    <option value="GENERAL"
+                            th:selected="${manga.demographic == 'GENERAL'}">
+                        General
+                    </option>
+
+
+                </select>
+
+            </div>
+
+
+
+            <!-- ================================= -->
+            <!-- TYPE -->
+            <!-- ================================= -->
+
+            <div class="form-group">
+
+                <label for="type">
+                    Type
+                </label>
+
+
+                <select id="type"
+                        name="type">
+
+
+                    <option value="">
+                        Select Type
+                    </option>
+
+
+                    <option value="MANGA"
+                            th:selected="${manga.type == 'MANGA'}">
+                        Manga
+                    </option>
+
+
+                    <option value="MANHWA"
+                            th:selected="${manga.type == 'MANHWA'}">
+                        Manhwa
+                    </option>
+
+
+                    <option value="MANHUA"
+                            th:selected="${manga.type == 'MANHUA'}">
+                        Manhua
+                    </option>
+
+
+                    <option value="WEBTOON"
+                            th:selected="${manga.type == 'WEBTOON'}">
+                        Webtoon
+                    </option>
+
+
+                </select>
+
+            </div>
+
+
+
+            <!-- ================================= -->
+            <!-- RELEASE YEAR -->
+            <!-- ================================= -->
+
+            <div class="form-group">
+
+                <label for="releaseYear">
+                    Release Year
+                </label>
+
+
+                <input id="releaseYear"
+                       type="number"
+                       name="releaseYear"
+                       min="1900"
+                       max="2100"
+                       placeholder="2026"
+                       th:value="${manga.releaseYear}">
+
+            </div>
+
+
+
+            <!-- ================================= -->
+            <!-- GENRES -->
+            <!-- ================================= -->
+
+            <div class="form-group full-width">
+
+                <label>
+                    Genres
+                </label>
+
+
+                <div class="checkbox-grid">
+
+
+                    <label class="checkbox-item"
+                           th:each="genre : ${genres}">
+
+
+                        <input type="checkbox"
+                               name="genreIds"
+                               th:value="${genre.id}"
+                               th:checked="${manga.genres.contains(genre)}">
+
+
+                        <span th:text="${genre.name}">
+                            Action
+                        </span>
+
+
+                    </label>
+
+
+                </div>
+
+
+                <p class="empty-option-message"
+                   th:if="${genres == null or genres.isEmpty()}">
+
+                    No genres available yet.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- ================================= -->
+            <!-- TAGS -->
+            <!-- ================================= -->
+
+            <div class="form-group full-width">
+
+                <label>
+                    Tags
+                </label>
+
+
+                <div class="checkbox-grid">
+
+
+                    <label class="checkbox-item"
+                           th:each="tag : ${tags}">
+
+
+                        <input type="checkbox"
+                               name="tagIds"
+                               th:value="${tag.id}"
+                               th:checked="${manga.tags.contains(tag)}">
+
+
+                        <span th:text="${tag.name}">
+                            Magic
+                        </span>
+
+
+                    </label>
+
+
+                </div>
+
+
+                <p class="empty-option-message"
+                   th:if="${tags == null or tags.isEmpty()}">
+
+                    No tags available yet.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- ================================= -->
+            <!-- DESCRIPTION -->
+            <!-- ================================= -->
+
+            <div class="form-group full-width">
+
+                <label for="description">
+                    Description
+                </label>
+
+
+                <textarea id="description"
+                          name="description"
+                          rows="6"
+                          th:text="${manga.description}">
+                </textarea>
+
+            </div>
+
+
+
+            <!-- ================================= -->
+            <!-- SAVE BUTTON -->
+            <!-- ================================= -->
+
+            <div class="form-actions full-width">
+
+
+                <button class="save-button"
+                        type="submit">
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+
+                    Save Changes
+
+                </button>
+
+
+            </div>
+
+
+        </form>
+
+
+    </section>
+
+
+
+    <!-- ===================================== -->
+    <!-- CHAPTERS -->
+    <!-- ===================================== -->
+
+    <section class="admin-panel">
+
+
+        <div class="panel-heading">
+
+
+            <div>
+
+                <h2>
+                    Chapters
+                </h2>
+
+
+                <p>
+                    Add, edit, delete and
+                    manage manga pages.
+                </p>
+
+            </div>
+
+
+            <span class="chapter-count"
+                  th:text="${chapters.size() + ' chapters'}">
+
+                0 chapters
+
+            </span>
+
+
+        </div>
+
+
+
+        <!-- ================================= -->
+        <!-- DUPLICATE WARNING -->
+        <!-- ================================= -->
+
+        <div class="warning-message"
+             th:if="${param.chapterExists}">
+
+
+            <i class="fa-solid fa-triangle-exclamation"></i>
+
+
+            A chapter with that number already exists.
+
+
+        </div>
+
+
+
+        <!-- ================================= -->
+        <!-- ADD CHAPTER -->
+        <!-- ================================= -->
+
+        <div class="add-chapter">
+
+
+            <h3>
+                Add Chapter
+            </h3>
+
+
+            <form th:action="@{/admin/manga/{id}/chapter/add(id=${adminNumber})}"
+                  method="post">
+
+
+                <div class="chapter-add-field">
+
+
+                    <label for="newChapterNumber">
+                        Chapter Number
+                    </label>
+
+
+                    <input id="newChapterNumber"
+                           type="number"
+                           name="chapterNumber"
+                           min="1"
+                           placeholder="1"
+                           required>
+
+
+                </div>
+
+
+                <div class="chapter-add-field chapter-title-input">
+
+
+                    <label for="newChapterTitle">
+                        Chapter Title
+                    </label>
+
+
+                    <input id="newChapterTitle"
+                           type="text"
+                           name="title"
+                           placeholder="Chapter 1"
+                           required>
+
+
+                </div>
+
+
+                <button class="add-button"
+                        type="submit">
+
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Add Chapter
+
+
+                </button>
+
+
+            </form>
+
+
+        </div>
+
+
+
+        <!-- ================================= -->
+        <!-- CHAPTER LIST -->
+        <!-- ================================= -->
+
+        <div class="chapter-admin-list"
+             th:if="${!chapters.isEmpty()}">
+
+
+            <div class="chapter-admin-card"
+                 th:each="chapter : ${chapters}">
+
+
+                <form class="chapter-edit-form"
+                      th:action="@{/admin/chapter/{id}/update(id=${chapter.id})}"
+                      method="post">
+
+
+                    <div class="chapter-number-field">
+
+
+                        <label>
+                            Chapter
+                        </label>
+
+
+                        <input type="number"
+                               name="chapterNumber"
+                               min="1"
+                               th:value="${chapter.chapterNumber}"
+                               required>
+
+
+                    </div>
+
+
+
+                    <div class="chapter-title-field">
+
+
+                        <label>
+                            Title
+                        </label>
+
+
+                        <input type="text"
+                               name="title"
+                               th:value="${chapter.title}"
+                               required>
+
+
+                    </div>
+
+
+
+                    <button class="small-button edit-button"
+                            type="submit">
+
+
+                        <i class="fa-solid fa-floppy-disk"></i>
+
+                        Save
+
+
+                    </button>
+
+
+                </form>
+
+
+
+                <!-- ================================= -->
+                <!-- CHAPTER ACTIONS -->
+                <!-- ================================= -->
+
+                <div class="chapter-actions">
+
+
+                    <a class="small-button read-button"
+                       th:href="@{/chapter/{id}(id=${chapter.id})}">
+
+
+                        <i class="fa-solid fa-book-open"></i>
+
+                        Read
+
+
+                    </a>
+
+
+
+                    <a class="small-button pages-button"
+                       th:href="@{/admin/chapter/{id}/pages(id=${chapter.id})}">
+
+
+                        <i class="fa-regular fa-images"></i>
+
+                        Manage Pages
+
+
+                    </a>
+
+
+
+                    <form th:action="@{/admin/chapter/{id}/delete(id=${chapter.id})}"
+                          method="post"
+                          onsubmit="return confirm('Delete this chapter?');">
+
+
+                        <button class="small-button delete-chapter-button"
+                                type="submit">
+
+
+                            <i class="fa-solid fa-trash"></i>
+
+                            Delete
+
+
+                        </button>
+
+
+                    </form>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================================= -->
+        <!-- NO CHAPTERS -->
+        <!-- ================================= -->
+
+        <div class="no-chapters"
+             th:if="${chapters.isEmpty()}">
+
+
+            <i class="fa-solid fa-book"></i>
+
+
+            <h3>
+                No chapters yet
+            </h3>
+
+
+            <p>
+                Add the first chapter using
+                the form above.
+            </p>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ===================================== -->
+    <!-- DANGER ZONE -->
+    <!-- ===================================== -->
+
+    <section class="danger-zone">
+
+
+        <div>
+
+
+            <h2>
+                Danger Zone
+            </h2>
+
+
+            <p>
+                Permanently delete this manga.
+            </p>
+
+
+        </div>
+
+
+        <form th:action="@{/admin/manga/{id}/delete(id=${adminNumber})}"
+              method="post"
+              onsubmit="return confirm('Are you sure you want to delete this manga?');">
+
+
+            <button type="submit"
+                    class="delete-manga-button">
+
+
+                <i class="fa-solid fa-trash"></i>
+
+                Delete Manga
+
+
+            </button>
+
+
+        </form>
+
+
+    </section>
+
+
+</main>
+
+
+</body>
+
+</html>

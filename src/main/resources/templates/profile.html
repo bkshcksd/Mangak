@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Profile - MANGAK</title>
+
+
+    <!-- ========================================= -->
+    <!-- CSS -->
+    <!-- ========================================= -->
+
+    <link rel="stylesheet"
+          th:href="@{/css/globals.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/profile.css}">
+
+
+    <!-- ========================================= -->
+    <!-- FONT AWESOME -->
+    <!-- ========================================= -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+
+<!-- ========================================= -->
+<!-- NAVBAR -->
+<!-- ========================================= -->
+
+<header class="navbar">
+
+
+    <!-- LOGO -->
+
+    <div class="logo">
+
+        <a th:href="@{/mangak}">
+            MANGAK
+        </a>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <form class="search-box"
+      th:action="@{/quick-search}"
+      method="get">
+
+    <input type="text"
+           name="keyword"
+           placeholder="Search manga...">
+
+    <button type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+
+</form>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="nav-links">
+
+        <div class="nav-dropdown">
+
+    <button class="nav-dropdown-button"
+            type="button">
+
+        Categories
+
+        <i class="fa-solid fa-chevron-down"></i>
+
+    </button>
+
+
+    <div class="nav-dropdown-menu">
+
+        <a th:each="tag : ${navbarTags}"
+           th:href="@{/search(tagId=${tag.id})}"
+           th:text="${tag.name}">
+
+            Magic
+
+        </a>
+
+    </div>
+
+</div>
+
+        <a th:href="@{/search}">
+            Search
+        </a>
+
+        <a th:href="@{/my-list}">
+            My List
+        </a>
+
+    </nav>
+
+
+    <!-- PROFILE -->
+
+    <div class="profile-area">
+
+        <a class="username"
+           th:href="@{/profile}"
+           th:text="${username}">
+            Username
+        </a>
+
+    </div>
+
+
+</header>
+
+
+<!-- ========================================= -->
+<!-- PROFILE PAGE -->
+<!-- ========================================= -->
+
+<main class="profile-page">
+
+
+    <!-- ========================================= -->
+    <!-- TITLE -->
+    <!-- ========================================= -->
+
+    <section class="profile-heading">
+
+
+        <div class="profile-title">
+
+            <i class="fa-regular fa-address-card"></i>
+
+            <h1>
+                Info
+            </h1>
+
+        </div>
+
+
+        <p>
+            General information about your account
+        </p>
+
+
+    </section>
+
+
+
+    <!-- ========================================= -->
+    <!-- PROFILE INFORMATION -->
+    <!-- ========================================= -->
+
+    <section class="profile-info">
+
+
+        <!-- ID -->
+
+        <div class="info-row">
+
+            <div class="info-label">
+                ID
+            </div>
+
+
+            <div class="info-value"
+                 th:text="${user.id}">
+                1
+            </div>
+
+        </div>
+
+
+
+        <!-- USERNAME -->
+
+        <div class="info-row">
+
+            <div class="info-label">
+                Username
+            </div>
+
+
+            <div class="info-value"
+                 th:text="${user.username}">
+                Example
+            </div>
+
+        </div>
+
+
+
+        <!-- EMAIL -->
+
+        <div class="info-row">
+
+            <div class="info-label">
+                Email
+            </div>
+
+
+            <div class="info-value"
+                 th:text="${user.email}">
+                example@email.com
+            </div>
+
+        </div>
+
+
+
+        <!-- ROLE -->
+
+        <div class="info-row">
+
+            <div class="info-label">
+                Role
+            </div>
+
+
+            <div class="info-value"
+                 th:text="${user.role}">
+                USER
+            </div>
+
+        </div>
+
+
+
+        <!-- AVATAR -->
+
+        <div class="info-row avatar-row">
+
+            <div class="info-label">
+                Avatar
+            </div>
+
+
+            <div class="avatar-content">
+
+
+                <div class="profile-avatar">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </div>
+
+
+                <button class="edit-avatar-button"
+                        type="button">
+
+                    Edit Avatar
+
+                </button>
+
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ========================================= -->
+    <!-- LOGOUT -->
+    <!-- ========================================= -->
+
+    <div class="logout-area">
+
+        <a th:href="@{/logout}"
+           class="logout-button">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            Logout
+
+        </a>
+
+    </div>
+
+
+</main>
+
+
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,461 @@
+/* ===========================================
+   BODY
+=========================================== */
+
+body {
+    margin: 0;
+
+    background: #0b1120;
+
+    color: #ffffff;
+
+    font-family: Arial, sans-serif;
+}
+
+
+/* ===========================================
+   NAVBAR
+=========================================== */
+
+.admin-navbar {
+    height: 72px;
+
+    padding: 0 45px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    background: #1F2937;
+
+    border-bottom:
+            1px solid rgba(255,255,255,.08);
+
+    box-sizing: border-box;
+}
+
+
+/* ===========================================
+   LOGO
+=========================================== */
+
+.logo a {
+    color: #BCBCBC;
+
+    font-family: "Jaro", sans-serif;
+
+    font-size: 34px;
+
+    letter-spacing: 2px;
+
+    text-decoration: none;
+}
+
+
+.admin-user {
+    color: #9ca3af;
+
+    font-size: 14px;
+}
+
+
+/* ===========================================
+   PAGE
+=========================================== */
+
+.admin-page {
+    max-width: 1300px;
+
+    margin: 45px auto;
+
+    padding: 0 30px;
+}
+
+
+/* ===========================================
+   HEADER
+=========================================== */
+
+.page-header {
+    margin-bottom: 30px;
+}
+
+
+.page-header h1 {
+    margin: 20px 0 5px;
+
+    font-size: 30px;
+}
+
+
+.page-header p {
+    margin: 0;
+
+    color: #9ca3af;
+}
+
+
+.back-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #9ca3af;
+
+    text-decoration: none;
+
+    font-size: 13px;
+}
+
+
+.back-button:hover {
+    color: #ffffff;
+}
+
+
+/* ===========================================
+   UPLOAD PANEL
+=========================================== */
+
+.upload-panel {
+    padding: 30px;
+
+    background: #111827;
+
+    border-radius: 14px;
+
+    margin-bottom: 35px;
+}
+
+
+.upload-panel h2 {
+    margin: 0 0 8px;
+}
+
+
+.upload-panel > p {
+    margin: 0 0 25px;
+
+    color: #9ca3af;
+
+    font-size: 14px;
+}
+
+
+/* ===========================================
+   UPLOAD BOX
+=========================================== */
+
+.upload-box {
+    min-height: 220px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    border: 2px dashed #374151;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+
+.upload-box:hover {
+    border-color: #facc15;
+
+    background: #172033;
+}
+
+
+.upload-box i {
+    margin-bottom: 15px;
+
+    color: #facc15;
+
+    font-size: 40px;
+}
+
+
+.upload-box strong {
+    margin-bottom: 7px;
+
+    font-size: 17px;
+}
+
+
+.upload-box span {
+    color: #6b7280;
+
+    font-size: 12px;
+}
+
+
+.upload-box input {
+    display: none;
+}
+
+
+/* ===========================================
+   FILE COUNT
+=========================================== */
+
+.file-count {
+    margin-top: 15px;
+
+    color: #9ca3af;
+
+    font-size: 13px;
+}
+
+
+/* ===========================================
+   UPLOAD BUTTON
+=========================================== */
+
+.upload-button {
+    margin-top: 20px;
+
+    min-height: 44px;
+
+    padding: 0 22px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #facc15;
+
+    color: #111827;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.upload-button:hover {
+    background: #eab308;
+}
+
+
+/* ===========================================
+   CURRENT PAGES
+=========================================== */
+
+.current-pages {
+    padding: 30px;
+
+    background: #111827;
+
+    border-radius: 14px;
+}
+
+
+.section-heading {
+    margin-bottom: 25px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+
+.section-heading h2 {
+    margin: 0;
+}
+
+
+.section-heading span {
+    color: #9ca3af;
+
+    font-size: 13px;
+}
+
+
+/* ===========================================
+   PAGE GRID
+=========================================== */
+
+.page-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+
+/* ===========================================
+   PAGE CARD
+=========================================== */
+
+.page-card {
+    position: relative;
+
+    overflow: hidden;
+
+    background: #1F2937;
+
+    border-radius: 10px;
+}
+
+
+.page-card img {
+    display: block;
+
+    width: 100%;
+    height: 330px;
+
+    object-fit: cover;
+}
+
+
+.page-number {
+    padding: 10px 12px;
+
+    color: #d1d5db;
+
+    font-size: 12px;
+}
+
+
+/* ===========================================
+   DELETE
+=========================================== */
+
+.page-card form {
+    padding: 10px;
+}
+
+
+.delete-button {
+    width: 100%;
+    height: 38px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #7f1d1d;
+
+    color: #ffffff;
+
+    cursor: pointer;
+}
+
+
+.delete-button:hover {
+    background: #991b1b;
+}
+
+
+/* ===========================================
+   EMPTY
+=========================================== */
+
+.empty-pages {
+    padding: 70px 20px;
+
+    text-align: center;
+
+    background: #1F2937;
+
+    border-radius: 10px;
+}
+
+
+.empty-pages i {
+    margin-bottom: 15px;
+
+    color: #4b5563;
+
+    font-size: 45px;
+}
+
+
+.empty-pages h3 {
+    margin: 0 0 8px;
+}
+
+
+.empty-pages p {
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+
+/* ===========================================
+   TABLET
+=========================================== */
+
+@media (max-width: 1000px) {
+
+    .page-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+}
+
+
+/* ===========================================
+   MOBILE
+=========================================== */
+
+@media (max-width: 700px) {
+
+    .admin-navbar {
+        padding: 0 20px;
+    }
+
+    .admin-page {
+        padding: 0 15px;
+    }
+
+    .page-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 14px;
+    }
+
+    .page-card img {
+        height: 250px;
+    }
+}
+
+
+/* ===========================================
+   PHONE
+=========================================== */
+
+@media (max-width: 450px) {
+
+    .page-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-card img {
+        height: auto;
+    }
+}

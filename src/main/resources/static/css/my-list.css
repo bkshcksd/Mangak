@@ -1,0 +1,768 @@
+/* ========================================= */
+/* PAGE */
+/* ========================================= */
+
+body {
+    margin: 0;
+    background: #1F2937;
+    color: #ffffff;
+    font-family: Impact, Arial, sans-serif;
+}
+
+
+.my-list-page {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 140px 60px 80px;
+}
+
+
+/* ========================================= */
+/* HEADER */
+/* ========================================= */
+
+.list-header {
+    margin-bottom: 60px;
+}
+
+
+.list-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+
+.list-title i {
+    font-size: 25px;
+    color: #d1d5db;
+}
+
+
+.list-title h1 {
+    margin: 0;
+    font-size: 34px;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+
+/* ========================================= */
+/* SEARCH */
+/* ========================================= */
+
+.list-search {
+    width: 330px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+
+    background: #374151;
+    border-radius: 5px;
+
+    padding: 0 14px;
+}
+
+
+.list-search i {
+    color: #9ca3af;
+    margin-right: 10px;
+}
+
+
+.list-search input {
+    width: 100%;
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 15px;
+}
+
+
+.list-search input::placeholder {
+    color: #9ca3af;
+}
+
+
+/* ========================================= */
+/* TABLE */
+/* ========================================= */
+
+.list-table {
+    width: 100%;
+}
+
+
+.list-table-header {
+    display: grid;
+
+    grid-template-columns:
+        minmax(420px, 1.5fr)
+        minmax(200px, 0.8fr)
+        minmax(320px, 1fr);
+
+    align-items: center;
+
+    padding: 0 20px 20px;
+
+    color: #60a5fa;
+
+    font-size: 28px;
+}
+
+
+/* ========================================= */
+/* ROW */
+/* ========================================= */
+
+.list-row {
+    display: grid;
+
+    grid-template-columns:
+        minmax(420px, 1.5fr)
+        minmax(200px, 0.8fr)
+        minmax(320px, 1fr);
+
+    align-items: center;
+
+    min-height: 170px;
+
+    padding: 18px 20px;
+
+    border-top: 1px solid #374151;
+
+    transition: background 0.2s ease;
+}
+
+
+.list-row:hover {
+    background: #243244;
+}
+
+
+/* ========================================= */
+/* MANGA INFO */
+/* ========================================= */
+
+.list-manga-info {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+
+.list-cover {
+    flex-shrink: 0;
+}
+
+
+.list-cover img {
+    width: 90px;
+    height: 130px;
+
+    object-fit: cover;
+
+    border-radius: 5px;
+
+    display: block;
+}
+
+
+.list-manga-text a {
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 18px;
+
+    line-height: 1.4;
+}
+
+
+.list-manga-text a:hover {
+    color: #60a5fa;
+}
+
+
+/* ========================================= */
+/* CONTINUE */
+/* ========================================= */
+
+.continue-column {
+    display: flex;
+    align-items: center;
+}
+
+
+.continue-button {
+    min-height: 38px;
+
+    padding: 0 18px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    border-radius: 6px;
+
+    background: #374151;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition: 0.2s ease;
+}
+
+
+.continue-button:hover {
+    background: #4b5563;
+}
+
+
+/* ========================================= */
+/* STATUS */
+/* ========================================= */
+
+.status-column {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+
+.reading-status,
+.manga-status {
+    min-height: 34px;
+
+    padding: 0 12px;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 6px;
+
+    border-radius: 6px;
+
+    font-size: 12px;
+}
+
+
+.reading-status {
+    background: #374151;
+    color: #34d399;
+}
+
+
+.manga-status {
+    background: #374151;
+    color: #34d399;
+}
+
+
+/* ========================================= */
+/* REMOVE */
+/* ========================================= */
+
+.remove-button {
+    width: 36px;
+    height: 36px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #374151;
+
+    color: #f87171;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.remove-button:hover {
+    background: #4b5563;
+    color: #ffffff;
+}
+
+
+/* ========================================= */
+/* EMPTY LIST */
+/* ========================================= */
+
+.empty-list {
+    min-height: 400px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    color: #9ca3af;
+}
+
+
+.empty-list > i {
+    font-size: 55px;
+
+    margin-bottom: 20px;
+}
+
+
+.empty-list h2 {
+    margin: 0 0 8px;
+
+    color: #ffffff;
+
+    font-size: 27px;
+}
+
+
+.empty-list p {
+    font-family: Arial, sans-serif;
+
+    margin-bottom: 24px;
+}
+
+
+.browse-button {
+    padding: 12px 22px;
+
+    background: #2563eb;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    border-radius: 6px;
+}
+
+
+.browse-button:hover {
+    background: #3b82f6;
+}
+
+
+/* ========================================= */
+/* RESPONSIVE */
+/* ========================================= */
+
+@media (max-width: 1000px) {
+
+    .my-list-page {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+
+    .list-table-header {
+        display: none;
+    }
+
+
+    .list-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+
+    .continue-column,
+    .status-column {
+        padding-left: 112px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .my-list-page {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+
+    .list-search {
+        width: auto;
+    }
+
+
+    .list-row {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+
+    .list-cover img {
+        width: 75px;
+        height: 110px;
+    }
+
+
+    .continue-column,
+    .status-column {
+        padding-left: 97px;
+    }
+
+}
+/* ===========================================
+NAVBAR
+=========================================== */
+
+.navbar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 80px;
+
+    background: #1F2937;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 60px;
+
+    border-bottom:
+            1px solid rgba(255,255,255,.08);
+
+    z-index: 9999;
+
+    box-sizing: border-box;
+}
+
+
+/* ===========================================
+LOGO
+=========================================== */
+
+.logo a {
+    color: #BCBCBC;
+
+    font-size: 38px;
+
+    font-family: Jaro, sans-serif;
+
+    letter-spacing: 2px;
+
+    text-decoration: none;
+}
+
+
+/* ===========================================
+SEARCH
+=========================================== */
+
+.search-box {
+    width: 420px;
+    height: 45px;
+
+    display: flex;
+
+    background: #374151;
+
+    border-radius: 30px;
+
+    overflow: hidden;
+}
+
+
+.search-box input {
+    flex: 1;
+
+    padding: 0 20px;
+
+    background: transparent;
+
+    border: none;
+    outline: none;
+
+    color: white;
+
+    font-size: 16px;
+}
+
+
+.search-box input::placeholder {
+    color: #d1d5db;
+}
+
+
+.search-box button {
+    width: 55px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    font-size: 18px;
+}
+
+
+.search-box button:hover {
+    background: #4b5563;
+}
+
+
+/* ===========================================
+NAVIGATION
+=========================================== */
+
+.nav-links {
+    display: flex;
+
+    gap: 35px;
+}
+
+
+.nav-links a {
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 18px;
+
+    transition: .3s;
+}
+
+
+.nav-links a:hover {
+    color: #facc15;
+}
+
+
+/* ===========================================
+PROFILE
+=========================================== */
+
+.profile-area {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.username {
+    color: white;
+
+    font-size: 16px;
+}
+
+
+/* ===========================================
+TABLET
+=========================================== */
+
+@media (max-width: 992px) {
+
+    .navbar {
+        height: auto;
+
+        flex-wrap: wrap;
+
+        gap: 15px;
+
+        padding: 15px 20px;
+    }
+
+
+    .search-box {
+        order: 3;
+
+        width: 100%;
+    }
+
+}
+
+
+/* ===========================================
+PHONE
+=========================================== */
+
+@media (max-width: 500px) {
+
+    .nav-links {
+        width: 100%;
+
+        justify-content: center;
+
+        gap: 18px;
+    }
+
+
+    .logo a {
+        font-size: 28px;
+    }
+
+}
+/* =========================================
+READING STATUS
+========================================= */
+
+.reading-status-form {
+    margin: 0;
+}
+
+
+.reading-status-select {
+    height: 36px;
+
+    padding: -1px 32px 0 12px;
+
+    background: #374151;
+
+    color: #34d399;
+
+    border: none;
+
+    border-radius: 6px;
+
+    outline: none;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+.reading-status-select:hover {
+    background: #4b5563;
+}
+
+
+.reading-status-select:focus {
+    background: #4b5563;
+}
+
+
+.reading-status-select option {
+    background: #1F2937;
+
+    color: #ffffff;
+}
+/* =========================================
+LIST CONTROLS
+========================================= */
+
+.list-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+
+/* =========================================
+STATUS FILTER
+========================================= */
+
+.status-filter select {
+    height: 42px;
+
+    padding: -1px 35px 0 14px;
+
+    background: #374151;
+
+    color: #ffffff;
+
+    border: none;
+
+    border-radius: 5px;
+
+    outline: none;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+
+.status-filter select:hover {
+    background: #4b5563;
+}
+
+
+.status-filter select option {
+    background: #1F2937;
+
+    color: #ffffff;
+}
+
+
+/* =========================================
+NO FILTER RESULTS
+========================================= */
+
+.no-filter-results {
+    min-height: 280px;
+
+    display: none;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: #9ca3af;
+
+    text-align: center;
+}
+
+
+.no-filter-results i {
+    margin-bottom: 15px;
+
+    font-size: 34px;
+}
+
+
+.no-filter-results h3 {
+    margin: 0 0 7px;
+
+    color: #ffffff;
+}
+
+
+.no-filter-results p {
+    margin: 0;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 14px;
+}
+.username:hover {
+    color: #facc15;
+}
+

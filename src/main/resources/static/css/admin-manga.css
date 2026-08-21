@@ -1,0 +1,960 @@
+/* ===========================================
+   BODY
+=========================================== */
+
+body {
+    margin: 0;
+
+    background: #0b1120;
+
+    color: #ffffff;
+
+    font-family: Arial, sans-serif;
+}
+
+
+/* ===========================================
+   NAVBAR
+=========================================== */
+
+.admin-navbar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 72px;
+
+    box-sizing: border-box;
+
+    padding: 0 45px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    background: #1F2937;
+
+    border-bottom:
+            1px solid rgba(255,255,255,.08);
+
+    z-index: 9999;
+}
+
+
+.logo a {
+    color: #BCBCBC;
+
+    font-family: "Jaro", sans-serif;
+
+    font-size: 34px;
+
+    letter-spacing: 2px;
+
+    text-decoration: none;
+}
+
+
+.admin-navbar-right {
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+    color: #9ca3af;
+
+    font-size: 14px;
+}
+
+
+.admin-navbar-right a {
+    color: #d1d5db;
+
+    text-decoration: none;
+}
+
+
+.admin-navbar-right a:hover {
+    color: #facc15;
+}
+
+
+/* ===========================================
+   PAGE
+=========================================== */
+
+.admin-page {
+    max-width: 1250px;
+
+    margin: 115px auto 60px;
+
+    padding: 0 30px;
+}
+
+
+/* ===========================================
+   HEADER
+=========================================== */
+
+.admin-header {
+    margin-bottom: 35px;
+}
+
+
+.back-link {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 22px;
+
+    color: #9ca3af;
+
+    font-size: 13px;
+
+    text-decoration: none;
+}
+
+
+.back-link:hover {
+    color: #ffffff;
+}
+
+
+.admin-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 22px;
+}
+
+
+.admin-title img {
+    width: 90px;
+    height: 125px;
+
+    object-fit: cover;
+
+    border-radius: 10px;
+}
+
+
+.admin-label {
+    margin: 0 0 5px !important;
+
+    color: #facc15 !important;
+
+    font-size: 12px !important;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+}
+
+
+.admin-title h1 {
+    margin: 0 0 8px;
+
+    font-size: 32px;
+}
+
+
+.admin-title p {
+    margin: 0;
+
+    color: #9ca3af;
+
+    font-size: 14px;
+}
+
+
+/* ===========================================
+   PANEL
+=========================================== */
+
+.admin-panel {
+    margin-bottom: 30px;
+
+    padding: 30px;
+
+    background: #111827;
+
+    border:
+            1px solid rgba(255,255,255,.05);
+
+    border-radius: 14px;
+}
+
+
+.panel-heading {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 25px;
+}
+
+
+.panel-heading h2 {
+    margin: 0 0 6px;
+
+    font-size: 23px;
+}
+
+
+.panel-heading p {
+    margin: 0;
+
+    color: #9ca3af;
+
+    font-size: 13px;
+}
+
+
+.panel-heading > i {
+    color: #4b5563;
+
+    font-size: 24px;
+}
+
+
+.chapter-count {
+    padding: 7px 10px;
+
+    background: #1F2937;
+
+    border-radius: 7px;
+
+    color: #9ca3af;
+
+    font-size: 12px;
+}
+
+
+/* ===========================================
+   MANGA FORM
+=========================================== */
+
+.manga-form {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+
+.form-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.form-group.full-width,
+.form-actions.full-width {
+    grid-column: 1 / -1;
+}
+
+
+.form-group label {
+    color: #d1d5db;
+
+    font-size: 13px;
+}
+
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    border:
+            1px solid #374151;
+
+    border-radius: 8px;
+
+    background: #1F2937;
+
+    color: #ffffff;
+
+    outline: none;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+}
+
+
+.form-group input,
+.form-group select {
+    height: 44px;
+
+    padding: 0 13px;
+}
+
+
+.form-group textarea {
+    resize: vertical;
+
+    min-height: 120px;
+
+    padding: 13px;
+}
+
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #facc15;
+}
+
+
+.form-actions {
+    display: flex;
+
+    justify-content: flex-end;
+}
+
+
+.save-button {
+    min-height: 44px;
+
+    padding: 0 20px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #facc15;
+
+    color: #111827;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.save-button:hover {
+    background: #eab308;
+}
+
+
+/* ===========================================
+   WARNING
+=========================================== */
+
+.warning-message {
+    margin-bottom: 20px;
+
+    padding: 13px 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    background: rgba(234,179,8,.12);
+
+    border:
+            1px solid rgba(234,179,8,.25);
+
+    border-radius: 8px;
+
+    color: #fde68a;
+
+    font-size: 13px;
+}
+
+
+/* ===========================================
+   ADD CHAPTER
+=========================================== */
+
+.add-chapter {
+    margin-bottom: 25px;
+
+    padding: 20px;
+
+    background: #1F2937;
+
+    border-radius: 10px;
+}
+
+
+.add-chapter h3 {
+    margin: 0 0 18px;
+
+    font-size: 17px;
+}
+
+
+.add-chapter form {
+    display: grid;
+
+    grid-template-columns:
+        150px minmax(0,1fr) auto;
+
+    align-items: end;
+
+    gap: 15px;
+}
+
+
+.chapter-add-field {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.chapter-add-field label {
+    color: #9ca3af;
+
+    font-size: 12px;
+}
+
+
+.chapter-add-field input {
+    height: 42px;
+
+    box-sizing: border-box;
+
+    padding: 0 12px;
+
+    border:
+            1px solid #374151;
+
+    border-radius: 7px;
+
+    background: #111827;
+
+    color: #ffffff;
+
+    outline: none;
+}
+
+
+.chapter-add-field input:focus {
+    border-color: #facc15;
+}
+
+
+.add-button {
+    height: 42px;
+
+    padding: 0 17px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #facc15;
+
+    color: #111827;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* ===========================================
+   CHAPTER LIST
+=========================================== */
+
+.chapter-admin-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+.chapter-admin-card {
+    padding: 15px;
+
+    background: #1F2937;
+
+    border:
+            1px solid rgba(255,255,255,.04);
+
+    border-radius: 10px;
+}
+
+
+.chapter-edit-form {
+    display: grid;
+
+    grid-template-columns:
+        120px minmax(0,1fr) auto;
+
+    align-items: end;
+
+    gap: 12px;
+
+    margin-bottom: 12px;
+}
+
+
+.chapter-number-field,
+.chapter-title-field {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+
+.chapter-number-field label,
+.chapter-title-field label {
+    color: #9ca3af;
+
+    font-size: 11px;
+}
+
+
+.chapter-edit-form input {
+    height: 38px;
+
+    box-sizing: border-box;
+
+    padding: 0 10px;
+
+    border:
+            1px solid #374151;
+
+    border-radius: 7px;
+
+    background: #111827;
+
+    color: #ffffff;
+
+    outline: none;
+}
+
+
+.chapter-edit-form input:focus {
+    border-color: #facc15;
+}
+
+
+/* ===========================================
+   CHAPTER ACTIONS
+=========================================== */
+
+.chapter-actions {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+
+.small-button {
+    min-height: 36px;
+
+    padding: 0 12px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+
+.edit-button {
+    background: #374151;
+}
+
+
+.read-button {
+    background: #1d4ed8;
+}
+
+
+.pages-button {
+    background: #6d28d9;
+}
+
+
+.delete-chapter-button {
+    background: #7f1d1d;
+}
+
+
+.small-button:hover {
+    filter: brightness(1.15);
+}
+
+
+/* ===========================================
+   NO CHAPTERS
+=========================================== */
+
+.no-chapters {
+    padding: 50px 20px;
+
+    text-align: center;
+
+    background: #1F2937;
+
+    border-radius: 10px;
+}
+
+
+.no-chapters i {
+    margin-bottom: 13px;
+
+    color: #4b5563;
+
+    font-size: 35px;
+}
+
+
+.no-chapters h3 {
+    margin: 0 0 7px;
+}
+
+
+.no-chapters p {
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+
+/* ===========================================
+   DANGER ZONE
+=========================================== */
+
+.danger-zone {
+    padding: 22px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    border:
+            1px solid rgba(239,68,68,.3);
+
+    border-radius: 12px;
+
+    background: rgba(127,29,29,.12);
+}
+
+
+.danger-zone h2 {
+    margin: 0 0 5px;
+
+    color: #fecaca;
+
+    font-size: 18px;
+}
+
+
+.danger-zone p {
+    margin: 0;
+
+    color: #9ca3af;
+
+    font-size: 12px;
+}
+
+
+.delete-manga-button {
+    height: 42px;
+
+    padding: 0 18px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #991b1b;
+
+    color: #ffffff;
+
+    cursor: pointer;
+}
+
+
+/* ===========================================
+   TABLET
+=========================================== */
+
+@media (max-width: 850px) {
+
+    .manga-form {
+        grid-template-columns: 1fr;
+    }
+
+
+    .form-group.full-width,
+    .form-actions.full-width {
+        grid-column: auto;
+    }
+
+
+    .add-chapter form {
+        grid-template-columns: 1fr;
+    }
+
+
+    .chapter-edit-form {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ===========================================
+   MOBILE
+=========================================== */
+
+@media (max-width: 600px) {
+
+    .admin-navbar {
+        padding: 0 18px;
+    }
+
+
+    .logo a {
+        font-size: 28px;
+    }
+
+
+    .admin-navbar-right a {
+        display: none;
+    }
+
+
+    .admin-page {
+        padding: 0 15px;
+    }
+
+
+    .admin-title {
+        align-items: flex-start;
+    }
+
+
+    .admin-title img {
+        width: 75px;
+        height: 105px;
+    }
+
+
+    .admin-title h1 {
+        font-size: 24px;
+    }
+
+
+    .admin-panel {
+        padding: 20px;
+    }
+
+
+    .chapter-actions {
+        flex-direction: column;
+    }
+
+
+    .chapter-actions form,
+    .chapter-actions .small-button {
+        width: 100%;
+
+        box-sizing: border-box;
+    }
+
+
+    .danger-zone {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+
+    .delete-manga-button {
+        width: 100%;
+
+        justify-content: center;
+    }
+}
+/* ===========================================
+GENRE + TAG CHECKBOXES
+=========================================== */
+
+.checkbox-grid {
+    margin-top: 10px;
+
+    display: grid;
+
+    grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+
+.checkbox-item {
+    min-height: 42px;
+
+    padding: 0 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    background: #1F2937;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 7px;
+
+    color: #d1d5db;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.checkbox-item:hover {
+    background: #374151;
+
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+
+.checkbox-item input {
+    width: 16px;
+    height: 16px;
+
+    cursor: pointer;
+
+    accent-color: #facc15;
+}
+
+
+.empty-option-message {
+    margin-top: 10px;
+
+    color: #9ca3af;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 14px;
+}
+
+
+@media (max-width: 1000px) {
+
+    .checkbox-grid {
+        grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 750px) {
+
+    .checkbox-grid {
+        grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .checkbox-grid {
+        grid-template-columns:
+                1fr;
+    }
+
+}
+/* ===========================================
+   NEW MANGA INFO FIELDS
+=========================================== */
+
+.form-group select {
+    cursor: pointer;
+}
+
+
+.form-group input[type="number"] {
+    appearance: textfield;
+}
+
+
+.form-group input[type="number"]::-webkit-inner-spin-button,
+.form-group input[type="number"]::-webkit-outer-spin-button {
+    opacity: 1;
+}

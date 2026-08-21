@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Updates - MANGAK</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/globals.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/updates.css}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+
+<!-- ========================================= -->
+<!-- NAVBAR -->
+<!-- ========================================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+
+        <a th:href="@{/mangak}">
+            MANGAK
+        </a>
+
+    </div>
+
+
+    <form class="search-box"
+      th:action="@{/quick-search}"
+      method="get">
+
+    <input type="text"
+           name="keyword"
+           placeholder="Search manga...">
+
+    <button type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+
+</form>
+
+
+    <nav class="nav-links">
+
+        <div class="nav-dropdown">
+
+    <button class="nav-dropdown-button"
+            type="button">
+
+        Categories
+
+        <i class="fa-solid fa-chevron-down"></i>
+
+    </button>
+
+
+    <div class="nav-dropdown-menu">
+
+        <a th:each="tag : ${navbarTags}"
+           th:href="@{/search(tagId=${tag.id})}"
+           th:text="${tag.name}">
+
+            Magic
+
+        </a>
+
+    </div>
+
+</div>
+
+        <a th:href="@{/search}">
+            Search
+        </a>
+
+        <a th:href="@{/my-list}">
+            My List
+        </a>
+
+    </nav>
+
+
+    <div class="profile-area">
+
+        <a class="username"
+           th:href="@{/profile}"
+           th:text="${username}">
+            Username
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- ========================================= -->
+<!-- MAIN -->
+<!-- ========================================= -->
+
+<main class="updates-page">
+
+
+    <!-- ========================================= -->
+    <!-- HEADER -->
+    <!-- ========================================= -->
+
+    <section class="updates-header">
+
+        <div>
+
+            <h1>
+                Updates
+            </h1>
+
+            <p>
+                Latest manga updates
+            </p>
+
+        </div>
+
+
+        <span class="total-count">
+
+            <span th:text="${totalItems}">
+                0
+            </span>
+
+            Manga
+
+        </span>
+
+    </section>
+
+
+    <!-- ========================================= -->
+    <!-- GRID -->
+    <!-- ========================================= -->
+
+    <section class="updates-grid">
+
+
+        <a class="update-card"
+           th:each="manga : ${mangaList}"
+           th:href="@{/manga/{id}(id=${manga.id})}">
+
+
+            <div class="update-cover">
+
+                <img th:src="${manga.coverImage}"
+                     th:alt="${manga.title}">
+
+            </div>
+
+
+            <div class="update-info">
+
+                <h3 th:text="${manga.title}">
+                    Manga Title
+                </h3>
+
+
+                <p>
+                    Latest Update
+                </p>
+
+
+                <span th:text="${manga.status}">
+                    ONGOING
+                </span>
+
+            </div>
+
+
+        </a>
+
+
+    </section>
+
+
+    <!-- ========================================= -->
+    <!-- PAGINATION -->
+    <!-- ========================================= -->
+
+    <nav class="pagination"
+         th:if="${totalPages > 1}">
+
+
+        <!-- PREVIOUS -->
+
+        <a class="page-button"
+           th:if="${currentPage > 0}"
+           th:href="@{/updates(page=${currentPage - 1})}">
+
+            <i class="fa-solid fa-chevron-left"></i>
+
+            Previous
+
+        </a>
+
+
+        <span class="page-button disabled"
+              th:if="${currentPage == 0}">
+
+            <i class="fa-solid fa-chevron-left"></i>
+
+            Previous
+
+        </span>
+
+
+        <!-- PAGE NUMBERS -->
+
+        <a class="page-number"
+           th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}"
+           th:href="@{/updates(page=${pageNumber})}"
+           th:text="${pageNumber + 1}"
+           th:classappend="${pageNumber == currentPage} ? ' active' : ''">
+
+            1
+
+        </a>
+
+
+        <!-- NEXT -->
+
+        <a class="page-button"
+           th:if="${currentPage < totalPages - 1}"
+           th:href="@{/updates(page=${currentPage + 1})}">
+
+            Next
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+        </a>
+
+
+        <span class="page-button disabled"
+              th:if="${currentPage >= totalPages - 1}">
+
+            Next
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+        </span>
+
+
+    </nav>
+
+
+</main>
+
+
+</body>
+</html>
+
+
+
+

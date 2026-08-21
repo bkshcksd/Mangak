@@ -1,0 +1,1254 @@
+/* ===========================================
+   HOME PAGE
+=========================================== */
+
+body {
+    margin: 0;
+
+    background: #1F2937;
+
+    color: #ffffff;
+
+    font-family: "Impact-Regular", Impact, sans-serif;
+}
+
+
+/* ===========================================
+   NAVBAR
+=========================================== */
+
+.navbar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 80px;
+
+    background: #1F2937;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 60px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    z-index: 9999;
+}
+
+
+/* ===========================================
+   LOGO
+=========================================== */
+
+.logo a {
+    font-size: 38px;
+    color: #BCBCBC;
+    font-family: jaro;
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.logo a:hover {
+    color: #313d40;
+}
+
+
+/* ===========================================
+   SEARCH BAR
+=========================================== */
+
+.search-box {
+    width: 420px;
+    height: 45px;
+
+    background: #374151;
+
+    border-radius: 30px;
+
+    display: flex;
+
+    overflow: hidden;
+}
+
+.search-box input {
+    flex: 1;
+
+    background: transparent;
+
+    color: #ffffff;
+
+    border: none;
+
+    outline: none;
+
+    padding: 0 20px;
+
+    font-size: 16px;
+}
+
+.search-box input::placeholder {
+    color: #d1d5db;
+}
+
+.search-box button {
+    width: 55px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #ffffff;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.search-box button:hover {
+    background: #4b5563;
+}
+
+
+/* ===========================================
+   NAV LINKS
+=========================================== */
+
+.nav-links {
+    display: flex;
+
+    gap: 35px;
+}
+
+.nav-links a {
+    position: relative;
+
+    color: #ffffff;
+
+    font-size: 18px;
+
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+.nav-links a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -8px;
+
+    width: 0;
+    height: 2px;
+
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #facc15;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+
+/* ===========================================
+   PROFILE
+=========================================== */
+
+.profile-area {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.username {
+    color: #ffffff;
+
+    font-size: 16px;
+
+    white-space: nowrap;
+}
+
+.profile-area img {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+}
+
+
+/* ===========================================
+   PAGE
+=========================================== */
+
+.page {
+    max-width: 1600px;
+
+    margin: 115px auto 35px;
+
+    padding: 0 30px;
+
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr) 320px;
+
+    gap: 40px;
+}
+
+.left-content {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 50px;
+}
+
+
+/* ===========================================
+   MANGA SECTION
+=========================================== */
+
+.manga-section {
+    width: 100%;
+
+    min-width: 0;
+
+    animation: fadeUp 0.5s ease;
+}
+
+.section-title {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.section-title h2 {
+    margin: 0;
+
+    font-size: 28px;
+
+    color: #ffffff;
+
+    letter-spacing: 1px;
+}
+
+.section-title a {
+    color: #9ca3af;
+
+    font-size: 15px;
+
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+.section-title a:hover {
+    color: #facc15;
+}
+
+
+/* ===========================================
+   HORIZONTAL MANGA ROW
+=========================================== */
+
+.manga-row {
+    display: flex;
+
+    gap: 18px;
+
+    width: 100%;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-behavior: smooth;
+
+    scrollbar-width: none;
+
+    cursor: grab;
+
+    padding-bottom: 10px;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+.manga-row::-webkit-scrollbar {
+    display: none;
+}
+
+.manga-row.dragging {
+    cursor: grabbing;
+
+    user-select: none;
+}
+
+
+/* ===========================================
+   MANGA CARD
+=========================================== */
+
+.manga-card {
+    flex: 0 0 180px;
+
+    width: 180px;
+    min-width: 180px;
+    max-width: 180px;
+
+    height: 315px;
+
+    background: #111827;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    transition:
+            transform 0.35s ease,
+            box-shadow 0.35s ease;
+}
+
+.manga-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+}
+
+.manga-card img {
+    width: 180px;
+    height: 255px;
+
+    min-width: 180px;
+    max-width: 180px;
+
+    min-height: 255px;
+    max-height: 255px;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition: transform 0.35s ease;
+}
+
+.manga-card:hover img {
+    transform: scale(1.05);
+}
+
+.manga-card h3 {
+    margin: 0;
+
+    padding: 9px 12px 2px;
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    line-height: 19px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.manga-card p {
+    margin: 0;
+
+    padding: 0 12px 9px;
+
+    color: #9ca3af;
+
+    font-size: 12px;
+
+    line-height: 16px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* ===========================================
+   SCROLL WRAPPER
+=========================================== */
+
+.manga-scroll-wrapper {
+    position: relative;
+
+    width: 100%;
+
+    min-width: 0;
+}
+
+.manga-scroll-wrapper .manga-row {
+    width: 100%;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-behavior: smooth;
+
+    scrollbar-width: none;
+
+    overscroll-behavior-x: contain;
+
+    cursor: grab;
+
+    padding-bottom: 10px;
+}
+
+.manga-scroll-wrapper .manga-row::-webkit-scrollbar {
+    display: none;
+}
+
+.manga-scroll-wrapper .manga-row.dragging {
+    cursor: grabbing;
+
+    scroll-behavior: auto;
+
+    user-select: none;
+}
+
+
+/* ===========================================
+   LEFT / RIGHT ARROWS
+=========================================== */
+
+.scroll-arrow {
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 42px;
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+
+    background: rgba(17, 24, 39, 0.90);
+
+    color: #ffffff;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    z-index: 20;
+
+    opacity: 0;
+
+    transition:
+            opacity 0.2s ease,
+            background 0.2s ease;
+}
+
+.manga-scroll-wrapper:hover .scroll-arrow {
+    opacity: 1;
+}
+
+.scroll-arrow:hover {
+    background: rgba(55, 65, 81, 0.98);
+}
+
+.scroll-arrow-left {
+    left: 0;
+
+    border-radius: 0 10px 10px 0;
+}
+
+.scroll-arrow-right {
+    right: 0;
+
+    border-radius: 10px 0 0 10px;
+}
+
+.scroll-arrow.arrow-hidden {
+    opacity: 0 !important;
+
+    pointer-events: none;
+}
+
+
+/* ===========================================
+   SIDEBAR
+=========================================== */
+
+.sidebar {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 30px;
+
+    position: sticky;
+
+    top: 100px;
+
+    height: fit-content;
+
+    min-width: 0;
+}
+
+.sidebar-section {
+    background: #111827;
+
+    border-radius: 14px;
+
+    padding: 20px;
+
+    overflow: hidden;
+}
+
+.sidebar-section h2 {
+    margin: 0 0 18px;
+
+    font-size: 24px;
+
+    color: #ffffff;
+}
+
+
+/* ===========================================
+   SIDEBAR VERTICAL SCROLL
+=========================================== */
+
+.sidebar-scroll {
+    max-height: 440px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding-right: 6px;
+
+    scroll-behavior: smooth;
+
+    overscroll-behavior: contain;
+
+    scrollbar-width: thin;
+
+    scrollbar-color: #4b5563 transparent;
+}
+
+.sidebar-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+    background: #4b5563;
+
+    border-radius: 20px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+}
+
+
+/* ===========================================
+   MINI CARD
+=========================================== */
+
+.mini-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    width: 100%;
+
+    margin-bottom: 18px;
+
+    transition: transform 0.3s ease;
+}
+
+.mini-card:last-child {
+    margin-bottom: 0;
+}
+
+.mini-card:hover {
+    transform: translateX(6px);
+}
+
+.mini-card img {
+    flex: 0 0 70px;
+
+    width: 70px;
+    min-width: 70px;
+    max-width: 70px;
+
+    height: 95px;
+
+    border-radius: 10px;
+
+    object-fit: cover;
+
+    transition: transform 0.3s ease;
+}
+
+.mini-card:hover img {
+    transform: scale(1.05);
+}
+
+.mini-card > div {
+    min-width: 0;
+}
+
+.mini-card h4 {
+    margin: 0 0 6px;
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    line-height: 20px;
+
+    max-width: 180px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.mini-card span {
+    display: block;
+
+    color: #9ca3af;
+
+    font-size: 13px;
+
+    max-width: 180px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* ===========================================
+   UPDATES GRID
+=========================================== */
+
+.updates-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 25px;
+
+    width: 100%;
+}
+
+
+/* ===========================================
+   UPDATE CARD
+=========================================== */
+
+.update-card {
+    width: 100%;
+
+    background: #111827;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    transition:
+            transform 0.35s ease,
+            box-shadow 0.35s ease;
+
+    cursor: pointer;
+}
+
+.update-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+}
+
+.update-card img {
+    width: 100%;
+
+    height: 280px;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition: transform 0.35s ease;
+}
+
+.update-card:hover img {
+    transform: scale(1.05);
+}
+
+.update-card h3 {
+    margin: 0;
+
+    padding: 10px 12px 3px;
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    line-height: 19px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.update-card p {
+    margin: 0;
+
+    padding: 0 12px 12px;
+
+    color: #9ca3af;
+
+    font-size: 12px;
+
+    line-height: 16px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* ===========================================
+   FADE ANIMATION
+=========================================== */
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+}
+
+
+/* ===========================================
+   GLOBAL SCROLLBAR
+=========================================== */
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #111827;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4b5563;
+
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #facc15;
+}
+
+
+/* ===========================================
+   TABLET
+=========================================== */
+
+@media (max-width: 1200px) {
+
+    .page {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: relative;
+
+        top: 0;
+    }
+
+    .sidebar-scroll {
+        max-height: 380px;
+    }
+
+    .updates-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+
+/* ===========================================
+   SMALL TABLET
+=========================================== */
+
+@media (max-width: 992px) {
+
+    .navbar {
+        position: fixed;
+
+        top: 0;
+        left: 0;
+
+        width: 100%;
+
+        height: auto;
+
+        flex-wrap: wrap;
+
+        padding: 20px;
+
+        gap: 20px;
+
+        z-index: 9999;
+    }
+
+    .search-box {
+        order: 3;
+
+        width: 100%;
+    }
+
+    .nav-links {
+        gap: 20px;
+    }
+
+    .page {
+        margin: 190px auto 35px;
+
+        padding: 0 20px;
+    }
+
+    .updates-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+
+/* ===========================================
+   MOBILE
+=========================================== */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        position: fixed;
+
+        top: 0;
+        left: 0;
+
+        width: 100%;
+
+        height: auto;
+
+        padding: 15px 20px;
+
+        z-index: 9999;
+    }
+
+    .page {
+        margin-top: 185px;
+    }
+
+    .logo a {
+        font-size: 30px;
+    }
+
+    .nav-links {
+        width: 100%;
+
+        justify-content: center;
+
+        gap: 18px;
+    }
+
+    .nav-links a {
+        font-size: 16px;
+    }
+
+    .profile-area {
+        margin-left: auto;
+    }
+
+    .section-title h2 {
+        font-size: 24px;
+    }
+
+    .manga-card {
+        flex: 0 0 150px;
+
+        width: 150px;
+        min-width: 150px;
+        max-width: 150px;
+
+        height: 270px;
+
+        scroll-snap-align: start;
+    }
+
+    .manga-card img {
+        width: 150px;
+        min-width: 150px;
+        max-width: 150px;
+
+        height: 210px;
+        min-height: 210px;
+        max-height: 210px;
+    }
+
+    .manga-card h3 {
+        font-size: 14px;
+    }
+
+    .scroll-arrow {
+        display: none;
+    }
+
+    .manga-scroll-wrapper .manga-row {
+        -webkit-overflow-scrolling: touch;
+
+        scroll-snap-type: x proximity;
+    }
+
+    .updates-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 18px;
+    }
+
+    .update-card img {
+        height: 230px;
+    }
+}
+
+
+/* ===========================================
+   PHONE
+=========================================== */
+
+@media (max-width: 576px) {
+
+    .navbar {
+        position: fixed;
+
+        top: 0;
+        left: 0;
+
+        width: 100%;
+
+        height: auto;
+
+        padding: 15px;
+
+        z-index: 9999;
+    }
+
+    .logo a {
+        font-size: 26px;
+    }
+
+    .search-box {
+        height: 42px;
+    }
+
+    .nav-links {
+        gap: 15px;
+
+        flex-wrap: wrap;
+    }
+
+    .nav-links a {
+        font-size: 15px;
+    }
+
+    .username {
+        font-size: 14px;
+    }
+
+    .page {
+        margin: 180px auto 35px;
+
+        padding: 0 15px;
+
+        gap: 25px;
+    }
+
+    .left-content {
+        gap: 35px;
+    }
+
+    .section-title {
+        margin-bottom: 15px;
+    }
+
+    .section-title h2 {
+        font-size: 22px;
+    }
+
+    .manga-row {
+        gap: 14px;
+    }
+
+    .manga-card {
+        flex: 0 0 140px;
+
+        width: 140px;
+        min-width: 140px;
+        max-width: 140px;
+
+        height: 255px;
+    }
+
+    .manga-card img {
+        width: 140px;
+        min-width: 140px;
+        max-width: 140px;
+
+        height: 198px;
+        min-height: 198px;
+        max-height: 198px;
+    }
+
+    .updates-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 14px;
+    }
+
+    .update-card {
+        width: 100%;
+    }
+
+    .update-card img {
+        width: 100%;
+
+        height: 210px;
+    }
+
+    .sidebar-section {
+        padding: 15px;
+    }
+
+    .sidebar-scroll {
+        max-height: 320px;
+    }
+
+    .mini-card img {
+        flex-basis: 60px;
+
+        width: 60px;
+        min-width: 60px;
+        max-width: 60px;
+
+        height: 80px;
+    }
+
+    .mini-card h4,
+    .mini-card span {
+        max-width: 200px;
+    }
+}
+
+
+/* ===========================================
+   VERY SMALL PHONE
+=========================================== */
+
+@media (max-width: 400px) {
+
+    .updates-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .update-card img {
+        height: 300px;
+    }
+
+    .profile-area img {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+
+/* ===========================================
+   SELECTION
+=========================================== */
+
+::selection {
+    background: #facc15;
+
+    color: #111827;
+}
+/* ===========================================
+READING HISTORY EMPTY STATE
+=========================================== */
+
+.history-empty-home {
+    min-height: 180px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 18px;
+
+    padding: 25px;
+
+    background: #111827;
+
+    border-radius: 12px;
+
+    color: #9ca3af;
+}
+
+
+.history-empty-home > i {
+    font-size: 36px;
+
+    color: #6b7280;
+}
+
+
+.history-empty-home h3 {
+    margin: 0 0 6px;
+
+    color: #ffffff;
+
+    font-size: 18px;
+}
+
+
+.history-empty-home p {
+    margin: 0;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 13px;
+}
+/* ===========================================
+HOMEPAGE UPDATES PAGINATION
+=========================================== */
+
+.home-updates-pagination {
+    margin-top: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 14px;
+}
+
+
+.home-update-page-button {
+    min-width: 115px;
+    height: 42px;
+
+    padding: 0 15px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    background: #374151;
+
+    border-radius: 7px;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+
+.home-update-page-button:hover {
+    background: #4b5563;
+
+    transform: translateY(-1px);
+}
+
+
+.home-update-page-button.disabled {
+    opacity: 0.35;
+
+    pointer-events: none;
+
+    cursor: not-allowed;
+}
+
+
+.home-update-page-number {
+    color: #d1d5db;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 14px;
+}
+
+
+.home-update-page-number strong {
+    color: #ffffff;
+}
+.username:hover {
+    color: #facc15;
+}

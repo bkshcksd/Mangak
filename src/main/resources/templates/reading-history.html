@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Reading History - MANGAK</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/globals.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/reading-history.css}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+
+<!-- ================================= -->
+<!-- NAVBAR -->
+<!-- ================================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+
+        <a th:href="@{/mangak}">
+            MANGAK
+        </a>
+
+    </div>
+
+
+    <form class="search-box"
+      th:action="@{/quick-search}"
+      method="get">
+
+    <input type="text"
+           name="keyword"
+           placeholder="Search manga...">
+
+    <button type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+
+</form>
+
+
+    <nav class="nav-links">
+
+        <div class="nav-dropdown">
+
+    <button class="nav-dropdown-button"
+            type="button">
+
+        Categories
+
+        <i class="fa-solid fa-chevron-down"></i>
+
+    </button>
+
+
+    <div class="nav-dropdown-menu">
+
+        <a th:each="tag : ${navbarTags}"
+           th:href="@{/search(tagId=${tag.id})}"
+           th:text="${tag.name}">
+
+            Magic
+
+        </a>
+
+    </div>
+
+</div>
+
+        <a th:href="@{/search}">
+            Search
+        </a>
+
+        <a th:href="@{/my-list}">
+            My List
+        </a>
+
+    </nav>
+
+
+    <div class="profile-area">
+
+        <a class="username"
+           th:href="@{/profile}"
+           th:text="${username}">
+            Username
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- ================================= -->
+<!-- MAIN -->
+<!-- ================================= -->
+
+<main class="history-page">
+
+
+    <!-- ================================= -->
+    <!-- HEADER -->
+    <!-- ================================= -->
+
+    <section class="history-header">
+
+        <div>
+
+            <div class="history-title">
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+                <h1>
+                    Reading History
+                </h1>
+
+            </div>
+
+
+            <p>
+                Continue from where you last stopped reading.
+            </p>
+
+        </div>
+
+
+        <form th:if="${!historyList.isEmpty()}"
+              th:action="@{/reading-history/clear}"
+              method="post"
+              onsubmit="return confirm('Clear all reading history?');">
+
+            <button class="clear-history-button"
+                    type="submit">
+
+                <i class="fa-solid fa-trash"></i>
+
+                Clear History
+
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- ================================= -->
+    <!-- EMPTY HISTORY -->
+    <!-- ================================= -->
+
+    <section class="empty-history"
+             th:if="${historyList.isEmpty()}">
+
+        <i class="fa-solid fa-clock-rotate-left"></i>
+
+        <h2>
+            No reading history yet
+        </h2>
+
+        <p>
+            Manga you read will appear here automatically.
+        </p>
+
+        <a th:href="@{/mangak}"
+           class="browse-button">
+
+            Browse Manga
+
+        </a>
+
+    </section>
+
+
+    <!-- ================================= -->
+    <!-- HISTORY LIST -->
+    <!-- ================================= -->
+
+    <section class="history-list"
+             th:if="${!historyList.isEmpty()}">
+
+
+        <div class="history-card"
+             th:each="history : ${historyList}">
+
+
+            <!-- COVER -->
+
+            <a class="history-cover"
+               th:href="@{/manga/{id}(id=${history.manga.id})}">
+
+                <img th:src="${history.manga.coverImage}"
+                     th:alt="${history.manga.title}">
+
+            </a>
+
+
+            <!-- INFO -->
+
+            <div class="history-info">
+
+                <a class="history-manga-title"
+                   th:href="@{/manga/{id}(id=${history.manga.id})}"
+                   th:text="${history.manga.title}">
+
+                    Manga Title
+
+                </a>
+
+
+                <p class="history-chapter">
+
+                    Last read:
+
+                    <span th:text="'Chapter ' + ${history.chapter.chapterNumber}">
+                        Chapter 1
+                    </span>
+
+                </p>
+
+
+                <p class="history-chapter-title"
+                   th:text="${history.chapter.title}">
+
+                    Chapter Title
+
+                </p>
+
+
+                <p class="history-time">
+
+                    <i class="fa-regular fa-clock"></i>
+
+                    <span th:text="${#temporals.format(
+                            history.lastReadAt,
+                            'dd MMM yyyy, hh:mm a'
+                    )}">
+                        09 Aug 2026
+                    </span>
+
+                </p>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="history-actions">
+
+                <a class="continue-button"
+                   th:href="@{/chapter/{id}(id=${history.chapter.id})}">
+
+                    <i class="fa-solid fa-book-open"></i>
+
+                    Continue Reading
+
+                </a>
+
+
+                <form th:action="@{/reading-history/remove/{id}(id=${history.manga.id})}"
+                      method="post">
+
+                    <button class="remove-history-button"
+                            type="submit"
+                            title="Remove from history">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                    </button>
+
+                </form>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+</body>
+</html>
+
+
+
+

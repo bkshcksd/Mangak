@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title th:text="${manga.title + ' - Chapter ' + chapter.chapterNumber}">
+        Chapter Reader
+    </title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/globals.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/chapter-reader.css}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+<!-- ========================================= -->
+<!-- TOP NAVBAR -->
+<!-- ========================================= -->
+
+<header class="reader-navbar">
+
+
+    <!-- LOGO -->
+
+    <div class="reader-logo">
+
+        <a th:href="@{/mangak}">
+            MANGAK
+        </a>
+
+    </div>
+
+
+    <!-- CENTER TITLE -->
+
+    <div class="reader-center-title">
+
+        <h2 th:text="${manga.title}">
+            Manga Title
+        </h2>
+
+        <span>
+            Chapter
+            <span th:text="${chapter.chapterNumber}">
+                1
+            </span>
+        </span>
+
+    </div>
+
+
+    <!-- ACCOUNT -->
+
+    <div class="reader-account">
+
+        <a class="username"
+           th:href="@{/profile}"
+           th:text="${username}">
+            Username
+        </a>
+
+    </div>
+
+
+</header>
+
+
+
+<!-- ========================================= -->
+<!-- READER TOOLBAR -->
+<!-- ========================================= -->
+
+<div class="reader-toolbar">
+
+
+    <!-- BACK TO MANGA -->
+
+    <a class="toolbar-button back-button"
+       th:href="@{/manga/{id}(id=${manga.id})}">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        <span>Back</span>
+
+    </a>
+
+
+
+    <!-- ===================================== -->
+    <!-- PREVIOUS CHAPTER -->
+    <!-- ===================================== -->
+
+    <a class="toolbar-button"
+
+       th:if="${previousChapter != null}"
+
+       th:href="@{/chapter/{id}(id=${previousChapter.id})}">
+
+        <i class="fa-solid fa-chevron-left"></i>
+
+        <span>Previous</span>
+
+    </a>
+
+
+    <button class="toolbar-button disabled"
+            th:if="${previousChapter == null}"
+            disabled>
+
+        <i class="fa-solid fa-chevron-left"></i>
+
+        <span>Previous</span>
+
+    </button>
+
+
+
+    <!-- ===================================== -->
+    <!-- CHAPTER SELECT -->
+    <!-- ===================================== -->
+
+    <div class="chapter-selector">
+
+        <i class="fa-solid fa-list"></i>
+
+        <select id="chapterSelect">
+
+
+            <option th:each="item : ${chapters}"
+
+                    th:value="${item.id}"
+
+                    th:text="'Chapter ' + ${item.chapterNumber}"
+
+                    th:selected="${item.id == chapter.id}">
+
+                Chapter
+
+            </option>
+
+
+        </select>
+
+    </div>
+
+
+
+    <!-- ===================================== -->
+    <!-- NEXT CHAPTER -->
+    <!-- ===================================== -->
+
+    <a class="toolbar-button"
+
+       th:if="${nextChapter != null}"
+
+       th:href="@{/chapter/{id}(id=${nextChapter.id})}">
+
+        <span>Next</span>
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+    </a>
+
+
+    <button class="toolbar-button disabled"
+            th:if="${nextChapter == null}"
+            disabled>
+
+        <span>Next</span>
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+    </button>
+
+
+</div>
+
+
+
+<!-- ========================================= -->
+<!-- MAIN READER -->
+<!-- ========================================= -->
+
+<main class="reader-page">
+
+
+
+    <!-- ===================================== -->
+    <!-- CHAPTER INFO -->
+    <!-- ===================================== -->
+
+    <section class="chapter-info">
+
+
+        <h1 th:text="${manga.title}">
+            Manga Title
+        </h1>
+
+
+        <h2>
+
+            Chapter
+
+            <span th:text="${chapter.chapterNumber}">
+                1
+            </span>
+
+        </h2>
+
+
+        <p th:text="${chapter.title}">
+            Chapter Title
+        </p>
+
+
+    </section>
+
+
+
+    <!-- ===================================== -->
+    <!-- MANGA PAGES -->
+    <!-- ===================================== -->
+
+    <section class="reader-content">
+
+
+        <!-- ================================= -->
+        <!-- ACTUAL MANGA PAGE IMAGES -->
+        <!-- ================================= -->
+
+        <div class="manga-pages"
+             th:if="${pages != null and !pages.isEmpty()}">
+
+
+            <img th:each="page : ${pages}"
+
+                 th:src="@{/chapter-page/{id}/image(id=${page.id})}"
+
+                 th:alt="'Page ' + ${page.pageNumber}"
+
+                 th:attr="data-page-number=${page.pageNumber}">
+
+
+        </div>
+
+
+
+        <!-- ================================= -->
+        <!-- NO PAGES AVAILABLE -->
+        <!-- ================================= -->
+
+        <div class="reader-empty"
+             th:if="${pages == null or pages.isEmpty()}">
+
+
+            <div class="empty-icon">
+
+                <i class="fa-regular fa-images"></i>
+
+            </div>
+
+
+            <h3>
+                No manga pages uploaded
+            </h3>
+
+
+            <p>
+                Manga pages for this chapter have not been uploaded yet.
+            </p>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ===================================== -->
+    <!-- BOTTOM CONTROLS -->
+    <!-- ===================================== -->
+
+    <section class="reader-bottom-controls">
+
+
+
+        <!-- ================================= -->
+        <!-- PREVIOUS -->
+        <!-- ================================= -->
+
+        <a class="bottom-control"
+
+           th:if="${previousChapter != null}"
+
+           th:href="@{/chapter/{id}(id=${previousChapter.id})}">
+
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+
+            <div>
+
+                <span>
+                    Previous
+                </span>
+
+                <strong th:text="'Chapter ' + ${previousChapter.chapterNumber}">
+                    Chapter 1
+                </strong>
+
+            </div>
+
+
+        </a>
+
+
+
+        <!-- NO PREVIOUS -->
+
+        <div class="bottom-control disabled"
+             th:if="${previousChapter == null}">
+
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+
+            <div>
+
+                <span>
+                    Previous
+                </span>
+
+                <strong>
+                    No chapter
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================================= -->
+        <!-- NEXT -->
+        <!-- ================================= -->
+
+        <a class="bottom-control next"
+
+           th:if="${nextChapter != null}"
+
+           th:href="@{/chapter/{id}(id=${nextChapter.id})}">
+
+
+            <div>
+
+                <span>
+                    Next
+                </span>
+
+                <strong th:text="'Chapter ' + ${nextChapter.chapterNumber}">
+                    Chapter 2
+                </strong>
+
+            </div>
+
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+
+        </a>
+
+
+
+        <!-- NO NEXT -->
+
+        <div class="bottom-control next disabled"
+             th:if="${nextChapter == null}">
+
+
+            <div>
+
+                <span>
+                    Next
+                </span>
+
+                <strong>
+                    No chapter
+                </strong>
+
+            </div>
+
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- ========================================= -->
+<!-- JAVASCRIPT -->
+<!-- ========================================= -->
+
+<script>
+
+    const chapterSelect =
+        document.getElementById("chapterSelect");
+
+
+    if (chapterSelect) {
+
+        chapterSelect.addEventListener(
+            "change",
+            function () {
+
+                const chapterId = this.value;
+
+                window.location.href =
+                    "/chapter/" + chapterId;
+
+            }
+        );
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
+
+

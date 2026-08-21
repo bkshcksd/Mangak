@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My List - MANGAK</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/globals.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/my-list.css}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+
+<!-- ================================= -->
+<!-- NAVBAR -->
+<!-- ================================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+
+        <a th:href="@{/mangak}">
+            MANGAK
+        </a>
+
+    </div>
+
+
+    <form class="search-box"
+      th:action="@{/quick-search}"
+      method="get">
+
+    <input type="text"
+           name="keyword"
+           placeholder="Search manga...">
+
+    <button type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+
+</form>
+
+
+    <nav class="nav-links">
+
+        <div class="nav-dropdown">
+
+    <button class="nav-dropdown-button"
+            type="button">
+
+        Categories
+
+        <i class="fa-solid fa-chevron-down"></i>
+
+    </button>
+
+
+    <div class="nav-dropdown-menu">
+
+        <a th:each="tag : ${navbarTags}"
+           th:href="@{/search(tagId=${tag.id})}"
+           th:text="${tag.name}">
+
+            Magic
+
+        </a>
+
+    </div>
+
+</div>
+
+        <a th:href="@{/search}">
+            Search
+        </a>
+
+        <a th:href="@{/my-list}">
+            My List
+        </a>
+
+    </nav>
+
+
+    <div class="profile-area">
+        <a class="username"
+           th:href="@{/profile}"
+           th:text="${username}">
+            Username
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- ================================= -->
+<!-- MAIN -->
+<!-- ================================= -->
+
+<main class="my-list-page">
+
+
+    <!-- ================================= -->
+    <!-- HEADER -->
+    <!-- ================================= -->
+
+    <section class="list-header">
+
+        <div class="list-title">
+
+            <i class="fa-solid fa-list"></i>
+
+            <h1>
+                My List
+            </h1>
+
+        </div>
+
+
+        <div class="list-controls">
+
+
+            <!-- SEARCH -->
+
+            <div class="list-search">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input type="text"
+                       id="listSearch"
+                       placeholder="Search your list...">
+
+            </div>
+
+
+            <!-- STATUS FILTER -->
+
+            <div class="status-filter">
+
+                <select id="statusFilter">
+
+                    <option value="ALL">
+                        All
+                    </option>
+
+                    <option value="READING">
+                        Reading
+                    </option>
+
+                    <option value="COMPLETED">
+                        Completed
+                    </option>
+
+                    <option value="PLAN_TO_READ">
+                        Plan to Read
+                    </option>
+
+                    <option value="ON_HOLD">
+                        On Hold
+                    </option>
+
+                    <option value="DROPPED">
+                        Dropped
+                    </option>
+
+                </select>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- ================================= -->
+    <!-- EMPTY LIST -->
+    <!-- ================================= -->
+
+    <section class="empty-list"
+             th:if="${bookmarks.isEmpty()}">
+
+        <i class="fa-regular fa-bookmark"></i>
+
+        <h2>
+            Your list is empty
+        </h2>
+
+        <p>
+            Add manga to your list and they will appear here.
+        </p>
+
+        <a th:href="@{/mangak}"
+           class="browse-button">
+
+            Browse Manga
+
+        </a>
+
+    </section>
+
+
+    <!-- ================================= -->
+    <!-- LIST -->
+    <!-- ================================= -->
+
+    <section class="list-table"
+             th:if="${!bookmarks.isEmpty()}">
+
+
+        <!-- TABLE HEADER -->
+
+        <div class="list-table-header">
+
+            <div>
+                Title
+            </div>
+
+            <div>
+                Continue
+            </div>
+
+            <div>
+                Status
+            </div>
+
+        </div>
+
+
+        <!-- ================================= -->
+        <!-- MANGA ROW -->
+        <!-- ================================= -->
+
+        <div class="list-row"
+             th:each="bookmark : ${bookmarks}"
+             th:attr="data-title=${bookmark.manga.title},
+                      data-status=${bookmark.readingStatus != null
+                      ? bookmark.readingStatus
+                      : 'READING'}">
+
+
+            <!-- ================================= -->
+            <!-- TITLE -->
+            <!-- ================================= -->
+
+            <div class="list-manga-info">
+
+                <a th:href="@{/manga/{id}(id=${bookmark.manga.id})}"
+                   class="list-cover">
+
+                    <img th:src="${bookmark.manga.coverImage}"
+                         th:alt="${bookmark.manga.title}">
+
+                </a>
+
+
+                <div class="list-manga-text">
+
+                    <a th:href="@{/manga/{id}(id=${bookmark.manga.id})}"
+                       th:text="${bookmark.manga.title}">
+
+                        Manga Title
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================= -->
+            <!-- CONTINUE -->
+            <!-- ================================= -->
+
+            <div class="continue-column">
+
+                <a th:href="@{/my-list/continue/{id}(id=${bookmark.manga.id})}"
+                   class="continue-button">
+
+                    <i class="fa-solid fa-book-open"></i>
+
+                    Continue
+
+                </a>
+
+            </div>
+
+
+            <!-- ================================= -->
+            <!-- STATUS -->
+            <!-- ================================= -->
+
+            <div class="status-column">
+
+
+                <!-- READING STATUS -->
+
+                <form class="reading-status-form"
+                      th:action="@{/my-list/status/{id}(id=${bookmark.manga.id})}"
+                      method="post">
+
+                    <select class="reading-status-select"
+                            name="status"
+                            onchange="this.form.submit()">
+
+
+                        <option value="READING"
+                                th:selected="${bookmark.readingStatus == null
+                                or bookmark.readingStatus == 'READING'}">
+
+                            Reading
+
+                        </option>
+
+
+                        <option value="COMPLETED"
+                                th:selected="${bookmark.readingStatus == 'COMPLETED'}">
+
+                            Completed
+
+                        </option>
+
+
+                        <option value="PLAN_TO_READ"
+                                th:selected="${bookmark.readingStatus == 'PLAN_TO_READ'}">
+
+                            Plan to Read
+
+                        </option>
+
+
+                        <option value="ON_HOLD"
+                                th:selected="${bookmark.readingStatus == 'ON_HOLD'}">
+
+                            On Hold
+
+                        </option>
+
+
+                        <option value="DROPPED"
+                                th:selected="${bookmark.readingStatus == 'DROPPED'}">
+
+                            Dropped
+
+                        </option>
+
+
+                    </select>
+
+                </form>
+
+
+                <!-- MANGA STATUS -->
+
+                <span class="manga-status"
+                      th:text="${bookmark.manga.status}">
+
+                    ONGOING
+
+                </span>
+
+
+                <!-- REMOVE FROM MY LIST -->
+
+                <form th:action="@{/my-list/remove/{id}(id=${bookmark.manga.id})}"
+                      method="post">
+
+                    <button class="remove-button"
+                            type="submit"
+                            title="Remove from My List">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                    </button>
+
+                </form>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ================================= -->
+        <!-- NO FILTER RESULTS -->
+        <!-- ================================= -->
+
+        <div class="no-filter-results"
+             id="noFilterResults">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <h3>
+                No manga found
+            </h3>
+
+            <p>
+                Try another search or reading status.
+            </p>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<!-- ================================= -->
+<!-- SEARCH + STATUS FILTER -->
+<!-- ================================= -->
+
+<script>
+
+    const listSearch =
+        document.getElementById("listSearch");
+
+    const statusFilter =
+        document.getElementById("statusFilter");
+
+    const listRows =
+        document.querySelectorAll(".list-row");
+
+    const noFilterResults =
+        document.getElementById("noFilterResults");
+
+
+    function filterList() {
+
+        const searchValue =
+            listSearch.value
+                .toLowerCase()
+                .trim();
+
+
+        const selectedStatus =
+            statusFilter.value;
+
+
+        let visibleCount = 0;
+
+
+        listRows.forEach(row => {
+
+            const title =
+                (row.dataset.title || "")
+                    .toLowerCase();
+
+
+            const status =
+                row.dataset.status || "READING";
+
+
+            const matchesSearch =
+                title.includes(searchValue);
+
+
+            const matchesStatus =
+                selectedStatus === "ALL"
+                ||
+                status === selectedStatus;
+
+
+            if (
+                matchesSearch
+                &&
+                matchesStatus
+            ) {
+
+                row.style.display =
+                    "grid";
+
+                visibleCount++;
+
+            } else {
+
+                row.style.display =
+                    "none";
+
+            }
+
+        });
+
+
+        if (noFilterResults) {
+
+            if (
+                visibleCount === 0
+                &&
+                listRows.length > 0
+            ) {
+
+                noFilterResults.style.display =
+                    "flex";
+
+            } else {
+
+                noFilterResults.style.display =
+                    "none";
+
+            }
+
+        }
+
+    }
+
+
+    if (listSearch) {
+
+        listSearch.addEventListener(
+            "input",
+            filterList
+        );
+
+    }
+
+
+    if (statusFilter) {
+
+        statusFilter.addEventListener(
+            "change",
+            filterList
+        );
+
+    }
+
+</script>
+
+
+</body>
+</html>
+
+
+
+

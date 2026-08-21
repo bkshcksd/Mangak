@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Chapter Pages - MANGAK</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/globals.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/chapter-pages-admin.css}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+<!-- ========================================= -->
+<!-- NAVBAR -->
+<!-- ========================================= -->
+
+<header class="admin-navbar">
+
+    <div class="logo">
+
+        <a th:href="@{/mangak}">
+            MANGAK
+        </a>
+
+    </div>
+
+
+    <div class="admin-user">
+
+        <span th:text="${username}">
+            Username
+        </span>
+
+    </div>
+
+</header>
+
+
+
+<!-- ========================================= -->
+<!-- PAGE -->
+<!-- ========================================= -->
+
+<main class="admin-page">
+
+
+    <!-- ===================================== -->
+    <!-- HEADER -->
+    <!-- ===================================== -->
+
+    <section class="page-header">
+
+
+        <a class="back-button"
+           th:href="@{/manga/{id}(id=${manga.id})}">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back to Manga
+
+        </a>
+
+
+        <div>
+
+            <h1 th:text="${manga.title}">
+                Manga Title
+            </h1>
+
+            <p>
+
+                Chapter
+
+                <span th:text="${chapter.chapterNumber}">
+                    1
+                </span>
+
+                Page Manager
+
+            </p>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ===================================== -->
+    <!-- MANGA / CHAPTER SWITCHER -->
+    <!-- ===================================== -->
+
+    <section class="admin-switcher-panel">
+
+        <div class="switcher-header">
+
+            <h2>
+                Change Manga / Chapter
+            </h2>
+
+            <p>
+                Select another manga or chapter to manage its pages.
+            </p>
+
+        </div>
+
+
+        <div class="admin-switcher">
+
+
+            <!-- ================================= -->
+            <!-- MANGA SELECT -->
+            <!-- ================================= -->
+
+            <div class="switcher-group">
+
+                <label for="mangaSelect">
+
+                    <i class="fa-solid fa-book"></i>
+
+                    Manga
+
+                </label>
+
+
+                <select id="mangaSelect">
+
+                    <option value="">
+                        Select Manga
+                    </option>
+
+
+                    <option th:each="item : ${allManga}"
+                            th:value="${item.id}"
+                            th:text="${item.title}"
+                            th:selected="${item.id == manga.id}">
+
+                        Manga Title
+
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- ================================= -->
+            <!-- CHAPTER SELECT -->
+            <!-- ================================= -->
+
+            <div class="switcher-group">
+
+                <label for="chapterSelect">
+
+                    <i class="fa-solid fa-list"></i>
+
+                    Chapter
+
+                </label>
+
+
+                <select id="chapterSelect">
+
+                    <option th:each="item : ${mangaChapters}"
+                            th:value="${item.id}"
+                            th:text="'Chapter ' + ${item.chapterNumber}"
+                            th:selected="${item.id == chapter.id}">
+
+                        Chapter 1
+
+                    </option>
+
+                </select>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ===================================== -->
+    <!-- UPLOAD -->
+    <!-- ===================================== -->
+
+    <section class="upload-panel">
+
+
+        <h2>
+            Upload Chapter Pages
+        </h2>
+
+
+        <p>
+            Select multiple manga page images.
+            They will be stored directly in TiDB.
+        </p>
+
+
+        <form th:action="@{/admin/chapter/{id}/pages(id=${chapter.id})}"
+              method="post"
+              enctype="multipart/form-data">
+
+
+            <label class="upload-box"
+                   for="pageFiles">
+
+
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+
+
+                <strong>
+                    Choose manga pages
+                </strong>
+
+
+                <span>
+                    JPG, JPEG, PNG or WEBP
+                </span>
+
+
+                <input id="pageFiles"
+                       type="file"
+                       name="files"
+                       accept="image/jpeg,image/png,image/webp"
+                       multiple
+                       required>
+
+
+            </label>
+
+
+            <div id="fileCount"
+                 class="file-count">
+
+                No files selected
+
+            </div>
+
+
+            <button class="upload-button"
+                    type="submit">
+
+                <i class="fa-solid fa-upload"></i>
+
+                Upload Pages
+
+            </button>
+
+
+        </form>
+
+
+    </section>
+
+
+
+    <!-- ===================================== -->
+    <!-- CURRENT PAGES -->
+    <!-- ===================================== -->
+
+    <section class="current-pages">
+
+
+        <div class="section-heading">
+
+            <h2>
+                Current Pages
+            </h2>
+
+
+            <span th:text="${pages.size() + ' pages'}">
+                0 pages
+            </span>
+
+        </div>
+
+
+
+        <!-- ================================= -->
+        <!-- PAGES -->
+        <!-- ================================= -->
+
+        <div class="page-grid"
+             th:if="${!pages.isEmpty()}">
+
+
+            <div class="page-card"
+                 th:each="page : ${pages}">
+
+
+                <div class="page-number">
+
+                    Page
+
+                    <span th:text="${page.pageNumber}">
+                        1
+                    </span>
+
+                </div>
+
+
+                <img th:src="@{/chapter-page/{id}/image(id=${page.id})}"
+                     th:alt="'Page ' + ${page.pageNumber}">
+
+
+                <form th:action="@{/admin/chapter-page/{id}/delete(id=${page.id})}"
+                      method="post">
+
+
+                    <input type="hidden"
+                           name="chapterId"
+                           th:value="${chapter.id}">
+
+
+                    <button class="delete-button"
+                            type="submit">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                        Delete
+
+                    </button>
+
+
+                </form>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================================= -->
+        <!-- EMPTY -->
+        <!-- ================================= -->
+
+        <div class="empty-pages"
+             th:if="${pages.isEmpty()}">
+
+
+            <i class="fa-regular fa-images"></i>
+
+
+            <h3>
+                No pages uploaded
+            </h3>
+
+
+            <p>
+                Upload your first manga page above.
+            </p>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- ========================================= -->
+<!-- JAVASCRIPT -->
+<!-- ========================================= -->
+
+<script>
+
+    // =========================================
+    // FILE COUNT
+    // =========================================
+
+    const fileInput =
+        document.getElementById("pageFiles");
+
+    const fileCount =
+        document.getElementById("fileCount");
+
+
+    if (fileInput) {
+
+        fileInput.addEventListener(
+            "change",
+            function () {
+
+                const count =
+                    this.files.length;
+
+
+                if (count === 0) {
+
+                    fileCount.textContent =
+                        "No files selected";
+
+                } else if (count === 1) {
+
+                    fileCount.textContent =
+                        "1 file selected";
+
+                } else {
+
+                    fileCount.textContent =
+                        count + " files selected";
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    // =========================================
+    // MANGA SELECT
+    // =========================================
+
+    const mangaSelect =
+        document.getElementById("mangaSelect");
+
+
+    if (mangaSelect) {
+
+        mangaSelect.addEventListener(
+            "change",
+            function () {
+
+                const mangaId =
+                    this.value;
+
+
+                if (mangaId) {
+
+                    window.location.href =
+                        "/admin/manga/" +
+                        mangaId +
+                        "/chapters";
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    // =========================================
+    // CHAPTER SELECT
+    // =========================================
+
+    const chapterSelect =
+        document.getElementById("chapterSelect");
+
+
+    if (chapterSelect) {
+
+        chapterSelect.addEventListener(
+            "change",
+            function () {
+
+                const chapterId =
+                    this.value;
+
+
+                if (chapterId) {
+
+                    window.location.href =
+                        "/admin/chapter/" +
+                        chapterId +
+                        "/pages";
+
+                }
+
+            }
+        );
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
+
+

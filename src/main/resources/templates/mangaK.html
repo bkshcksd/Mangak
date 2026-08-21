@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Mangak</title>
+
+
+    <!-- ========================================= -->
+    <!-- CSS -->
+    <!-- ========================================= -->
+
+    <link rel="stylesheet"
+          th:href="@{/css/globals.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/mangak.css}">
+
+
+    <!-- ========================================= -->
+    <!-- FONT AWESOME -->
+    <!-- ========================================= -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+
+<!-- ========================================= -->
+<!-- NAVBAR -->
+<!-- ========================================= -->
+
+<header class="navbar">
+
+
+    <!-- LOGO -->
+
+    <div class="logo">
+
+        <a th:href="@{/mangak}">
+            MANGAK
+        </a>
+
+    </div>
+
+
+    <!-- SEARCH BAR -->
+    <form class="search-box"
+          th:action="@{/quick-search}"
+          method="get">
+
+        <input type="text"
+               name="keyword"
+               placeholder="Search manga...">
+
+        <button type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+    </form>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="nav-links">
+
+        <div class="nav-dropdown">
+
+    <button class="nav-dropdown-button"
+            type="button">
+
+        Categories
+
+        <i class="fa-solid fa-chevron-down"></i>
+
+    </button>
+
+
+    <div class="nav-dropdown-menu">
+
+        <a th:each="tag : ${navbarTags}"
+           th:href="@{/search(tagId=${tag.id})}"
+           th:text="${tag.name}">
+
+            Magic
+
+        </a>
+
+    </div>
+
+</div>
+
+        <a th:href="@{/search}">
+            Search
+        </a>
+
+        <a th:href="@{/my-list}">
+            My List
+        </a>
+
+    </nav>
+
+
+    <!-- PROFILE -->
+
+    <div class="profile-area">
+        <a class="username"
+           th:href="@{/profile}"
+           th:text="${username}">
+            Username
+        </a>
+
+    </div>
+
+
+</header>
+
+
+<!-- ========================================= -->
+<!-- PAGE -->
+<!-- ========================================= -->
+
+<main class="page">
+
+
+    <!-- ===================================== -->
+    <!-- LEFT CONTENT -->
+    <!-- ===================================== -->
+
+    <div class="left-content">
+
+
+
+        <!-- ================================= -->
+        <!-- NEW CHAPTER -->
+        <!-- ================================= -->
+
+        <section class="manga-section">
+
+
+            <div class="section-title">
+
+                <h2>
+                    New Chapter
+                </h2>
+
+
+                <a href="#">
+                    View All
+                </a>
+
+            </div>
+
+
+            <div class="manga-row">
+
+
+                <a class="manga-card"
+                   th:each="manga : ${mangaList}"
+                   th:href="@{/manga/{id}(id=${manga.id})}">
+
+
+                    <img th:src="${manga.coverImage}"
+                         th:alt="${manga.title}">
+
+
+                    <h3 th:text="${manga.title}">
+                        Manga Title
+                    </h3>
+
+
+                    <p>
+                        New Chapter
+                    </p>
+
+
+                </a>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ================================= -->
+        <!-- READING HISTORY -->
+        <!-- ================================= -->
+
+        <section class="manga-section">
+
+
+            <div class="section-title">
+
+                <h2>
+                    Reading History
+                </h2>
+
+
+                <a th:href="@{/reading-history}">
+                    View All
+                </a>
+
+            </div>
+
+
+            <div class="manga-row"
+                 th:if="${readingHistoryList != null and !readingHistoryList.isEmpty()}">
+
+
+                <a class="manga-card"
+                   th:each="history, stat : ${readingHistoryList}"
+                   th:if="${stat.index < 10}"
+                   th:href="@{/chapter/{id}(id=${history.chapter.id})}">
+
+
+                    <img th:src="${history.manga.coverImage}"
+                         th:alt="${history.manga.title}">
+
+
+                    <h3 th:text="${history.manga.title}">
+                        Manga Title
+                    </h3>
+
+
+                    <p>
+
+                        Continue Chapter
+
+                        <span th:text="${history.chapter.chapterNumber}">
+                            1
+                        </span>
+
+                    </p>
+
+
+                </a>
+
+
+            </div>
+
+
+            <div class="history-empty-home"
+                 th:if="${readingHistoryList == null or readingHistoryList.isEmpty()}">
+
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+
+                <div>
+
+                    <h3>
+                        No reading history yet
+                    </h3>
+
+
+                    <p>
+                        Start reading a chapter and it will appear here.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ================================= -->
+        <!-- MOST POPULAR -->
+        <!-- ================================= -->
+
+        <section class="manga-section">
+
+
+            <div class="section-title">
+
+                <h2>
+                    Most Popular
+                </h2>
+
+
+                <a href="#">
+                    View All
+                </a>
+
+            </div>
+
+
+            <div class="manga-row">
+
+
+                <a class="manga-card"
+                   th:each="manga : ${mangaList}"
+                   th:href="@{/manga/{id}(id=${manga.id})}">
+
+
+                    <img th:src="${manga.coverImage}"
+                         th:alt="${manga.title}">
+
+
+                    <h3 th:text="${manga.title}">
+                        Manga Title
+                    </h3>
+
+
+                    <p>
+                        Popular
+                    </p>
+
+
+                </a>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ================================= -->
+        <!-- ADAPTED TO ANIME -->
+        <!-- ================================= -->
+
+        <section class="manga-section">
+
+
+            <div class="section-title">
+
+                <h2>
+                    Adapted To Anime
+                </h2>
+
+
+                <a href="#">
+                    View All
+                </a>
+
+            </div>
+
+
+            <div class="manga-row">
+
+
+                <a class="manga-card"
+                   th:each="manga : ${mangaList}"
+                   th:href="@{/manga/{id}(id=${manga.id})}">
+
+
+                    <img th:src="${manga.coverImage}"
+                         th:alt="${manga.title}">
+
+
+                    <h3 th:text="${manga.title}">
+                        Manga Title
+                    </h3>
+
+
+                    <p>
+                        Adapted To Anime
+                    </p>
+
+
+                </a>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ================================= -->
+        <!-- UPDATES -->
+        <!-- ================================= -->
+
+        <section class="manga-section"
+                 id="updates">
+
+
+            <div class="section-title">
+
+                <h2>
+                    Updates
+                </h2>
+
+
+                <a th:href="@{/updates}">
+                    View All
+                </a>
+
+            </div>
+
+
+            <!-- ================================= -->
+            <!-- PAGINATED UPDATES -->
+            <!-- ================================= -->
+
+            <div class="updates-grid">
+
+
+                <a class="update-card"
+                   th:each="manga : ${updatesList}"
+                   th:href="@{/manga/{id}(id=${manga.id})}">
+
+
+                    <img th:src="${manga.coverImage}"
+                         th:alt="${manga.title}">
+
+
+                    <h3 th:text="${manga.title}">
+                        Manga Title
+                    </h3>
+
+
+                    <p>
+                        Latest Update
+                    </p>
+
+
+                </a>
+
+
+            </div>
+
+
+            <!-- ================================= -->
+            <!-- HOMEPAGE UPDATE PAGINATION -->
+            <!-- ================================= -->
+
+            <div class="home-updates-pagination"
+                 th:if="${updateTotalPages != null and updateTotalPages > 1}">
+
+
+                <!-- PREVIOUS PAGE -->
+
+                <a class="home-update-page-button"
+                   th:if="${updateCurrentPage > 0}"
+                   th:href="@{/mangak(updatePage=${updateCurrentPage - 1})}">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Prev page
+
+                </a>
+
+
+                <!-- DISABLED PREVIOUS -->
+
+                <span class="home-update-page-button disabled"
+                      th:if="${updateCurrentPage == 0}">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Prev page
+
+                </span>
+
+
+                <!-- CURRENT PAGE -->
+
+                <span class="home-update-page-number">
+
+                    Page
+
+                    <strong th:text="${updateCurrentPage + 1}">
+                        1
+                    </strong>
+
+                    of
+
+                    <strong th:text="${updateTotalPages}">
+                        1
+                    </strong>
+
+                </span>
+
+
+                <!-- NEXT PAGE -->
+
+                <a class="home-update-page-button"
+                   th:if="${updateCurrentPage < updateTotalPages - 1}"
+                   th:href="@{/mangak(updatePage=${updateCurrentPage + 1})}">
+
+                    Next page
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+
+                <!-- DISABLED NEXT -->
+
+                <span class="home-update-page-button disabled"
+                      th:if="${updateCurrentPage >= updateTotalPages - 1}">
+
+                    Next page
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </span>
+
+
+            </div>
+
+
+        </section>
+
+
+    </div>
+
+
+
+    <!-- ===================================== -->
+    <!-- RIGHT SIDEBAR -->
+    <!-- ===================================== -->
+
+    <aside class="sidebar">
+
+
+
+        <!-- ================================= -->
+        <!-- RECENTLY ADDED -->
+        <!-- ================================= -->
+
+        <div class="sidebar-section">
+
+
+            <h2>
+                Recently Added
+            </h2>
+
+
+            <div class="sidebar-scroll">
+
+
+                <a class="mini-card"
+                   th:each="manga : ${mangaList}"
+                   th:href="@{/manga/{id}(id=${manga.id})}">
+
+
+                    <img th:src="${manga.coverImage}"
+                         th:alt="${manga.title}">
+
+
+                    <div>
+
+
+                        <h4 th:text="${manga.title}">
+                            Manga Title
+                        </h4>
+
+
+                        <span>
+                            Recently Added
+                        </span>
+
+
+                    </div>
+
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================================= -->
+        <!-- ONGOING -->
+        <!-- ================================= -->
+
+        <div class="sidebar-section">
+
+
+            <h2>
+                Ongoing
+            </h2>
+
+
+            <div class="sidebar-scroll">
+
+
+                <a class="mini-card"
+                   th:each="manga : ${mangaList}"
+                   th:if="${manga.status == 'ONGOING'}"
+                   th:href="@{/manga/{id}(id=${manga.id})}">
+
+
+                    <img th:src="${manga.coverImage}"
+                         th:alt="${manga.title}">
+
+
+                    <div>
+
+
+                        <h4 th:text="${manga.title}">
+                            Manga Title
+                        </h4>
+
+
+                        <span th:text="${manga.status}">
+                            ONGOING
+                        </span>
+
+
+                    </div>
+
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+    </aside>
+
+
+</main>
+
+
+<!-- ========================================= -->
+<!-- JAVASCRIPT -->
+<!-- ========================================= -->
+
+<script th:src="@{/js/scroll.js}"></script>
+
+
+</body>
+</html>
+
+
+

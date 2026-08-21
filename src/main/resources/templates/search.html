@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Search - MANGAK</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/globals.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/search.css}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+
+<!-- ========================================= -->
+<!-- NAVBAR -->
+<!-- ========================================= -->
+
+<header class="navbar">
+
+
+    <div class="logo">
+
+        <a th:href="@{/mangak}">
+            MANGAK
+        </a>
+
+    </div>
+
+
+    <!-- QUICK SEARCH -->
+
+    <form class="search-box"
+          th:action="@{/quick-search}"
+          method="get">
+
+        <input type="text"
+               name="keyword"
+               placeholder="Search manga...">
+
+        <button type="submit">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+        </button>
+
+    </form>
+
+
+    <nav class="nav-links">
+
+        <div class="nav-dropdown">
+
+    <button class="nav-dropdown-button"
+            type="button">
+
+        Categories
+
+        <i class="fa-solid fa-chevron-down"></i>
+
+    </button>
+
+
+    <div class="nav-dropdown-menu">
+
+        <a th:each="tag : ${navbarTags}"
+           th:href="@{/search(tagId=${tag.id})}"
+           th:text="${tag.name}">
+
+            Magic
+
+        </a>
+
+    </div>
+
+</div>
+
+        <a th:href="@{/search}">
+            Search
+        </a>
+
+        <a th:href="@{/my-list}">
+            My List
+        </a>
+
+    </nav>
+
+
+    <div class="profile-area">
+
+        <a class="username"
+           th:href="@{/profile}"
+           th:text="${username}">
+            Username
+        </a>
+
+    </div>
+
+
+</header>
+
+
+
+<!-- ========================================= -->
+<!-- SEARCH PAGE -->
+<!-- ========================================= -->
+
+<main class="search-page">
+
+
+    <!-- ========================================= -->
+    <!-- TITLE -->
+    <!-- ========================================= -->
+
+    <section class="search-heading">
+
+        <h1>
+            Search
+        </h1>
+
+        <p>
+            Find manga using keywords and advanced filters.
+        </p>
+
+    </section>
+
+
+
+    <!-- ========================================= -->
+    <!-- SEARCH + FILTER FORM -->
+    <!-- ========================================= -->
+
+    <section class="search-panel">
+
+
+        <form th:action="@{/search}"
+              method="get">
+
+
+            <!-- ================================= -->
+            <!-- KEYWORD -->
+            <!-- ================================= -->
+
+            <div class="main-search-row">
+
+
+                <div class="main-search-input">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input type="text"
+                           name="keyword"
+                           th:value="${keyword}"
+                           placeholder="Search manga title, author or artist...">
+
+                </div>
+
+
+                <button class="search-submit-button"
+                        type="submit">
+
+                    Search
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- ================================= -->
+            <!-- FILTERS -->
+            <!-- ================================= -->
+
+            <div class="filter-grid">
+
+
+                <!-- ================================= -->
+                <!-- GENRE -->
+                <!-- ================================= -->
+
+                <div class="filter-group">
+
+                    <label for="genreId">
+                        Genre
+                    </label>
+
+                    <select id="genreId"
+                            name="genreId">
+
+                        <option value="">
+                            All Genres
+                        </option>
+
+                        <option th:each="genre : ${genres}"
+                                th:value="${genre.id}"
+                                th:text="${genre.name}"
+                                th:selected="${selectedGenreId != null and selectedGenreId == genre.id}">
+
+                            Action
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- ================================= -->
+                <!-- TAG -->
+                <!-- ================================= -->
+
+                <div class="filter-group">
+
+                    <label for="tagId">
+                        Tag
+                    </label>
+
+                    <select id="tagId"
+                            name="tagId">
+
+                        <option value="">
+                            All Tags
+                        </option>
+
+                        <option th:each="tag : ${tags}"
+                                th:value="${tag.id}"
+                                th:text="${tag.name}"
+                                th:selected="${selectedTagId != null and selectedTagId == tag.id}">
+
+                            Magic
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- ================================= -->
+                <!-- STATUS -->
+                <!-- ================================= -->
+
+                <div class="filter-group">
+
+                    <label for="status">
+                        Status
+                    </label>
+
+                    <select id="status"
+                            name="status">
+
+                        <option value="">
+                            All Statuses
+                        </option>
+
+                        <option value="ONGOING"
+                                th:selected="${selectedStatus == 'ONGOING'}">
+                            Ongoing
+                        </option>
+
+                        <option value="COMPLETED"
+                                th:selected="${selectedStatus == 'COMPLETED'}">
+                            Completed
+                        </option>
+
+                        <option value="HIATUS"
+                                th:selected="${selectedStatus == 'HIATUS'}">
+                            Hiatus
+                        </option>
+
+                        <option value="CANCELLED"
+                                th:selected="${selectedStatus == 'CANCELLED'}">
+                            Cancelled
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- ================================= -->
+                <!-- DEMOGRAPHIC -->
+                <!-- ================================= -->
+
+                <div class="filter-group">
+
+                    <label for="demographic">
+                        Demographic
+                    </label>
+
+                    <select id="demographic"
+                            name="demographic">
+
+                        <option value="">
+                            All Demographics
+                        </option>
+
+                        <option value="SHOUNEN"
+                                th:selected="${selectedDemographic == 'SHOUNEN'}">
+                            Shounen
+                        </option>
+
+                        <option value="SEINEN"
+                                th:selected="${selectedDemographic == 'SEINEN'}">
+                            Seinen
+                        </option>
+
+                        <option value="SHOUJO"
+                                th:selected="${selectedDemographic == 'SHOUJO'}">
+                            Shoujo
+                        </option>
+
+                        <option value="JOSEI"
+                                th:selected="${selectedDemographic == 'JOSEI'}">
+                            Josei
+                        </option>
+
+                        <option value="KODOMO"
+                                th:selected="${selectedDemographic == 'KODOMO'}">
+                            Kodomo
+                        </option>
+
+                        <option value="GENERAL"
+                                th:selected="${selectedDemographic == 'GENERAL'}">
+                            General
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- ================================= -->
+                <!-- TYPE -->
+                <!-- ================================= -->
+
+                <div class="filter-group">
+
+                    <label for="type">
+                        Type
+                    </label>
+
+                    <select id="type"
+                            name="type">
+
+                        <option value="">
+                            All Types
+                        </option>
+
+                        <option value="MANGA"
+                                th:selected="${selectedType == 'MANGA'}">
+                            Manga
+                        </option>
+
+                        <option value="MANHWA"
+                                th:selected="${selectedType == 'MANHWA'}">
+                            Manhwa
+                        </option>
+
+                        <option value="MANHUA"
+                                th:selected="${selectedType == 'MANHUA'}">
+                            Manhua
+                        </option>
+
+                        <option value="WEBTOON"
+                                th:selected="${selectedType == 'WEBTOON'}">
+                            Webtoon
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- ================================= -->
+                <!-- RELEASE YEAR -->
+                <!-- ================================= -->
+
+                <div class="filter-group">
+
+                    <label for="releaseYear">
+                        Released Year
+                    </label>
+
+                    <input id="releaseYear"
+                           type="number"
+                           name="releaseYear"
+                           min="1900"
+                           max="2100"
+                           placeholder="Any Year"
+                           th:value="${selectedReleaseYear}">
+
+                </div>
+
+
+
+                <!-- ================================= -->
+                <!-- MINIMUM CHAPTER COUNT -->
+                <!-- ================================= -->
+
+                <div class="filter-group">
+
+                    <label for="minimumChapterCount">
+                        Minimum Chapters
+                    </label>
+
+                    <input id="minimumChapterCount"
+                           type="number"
+                           name="minimumChapterCount"
+                           min="1"
+                           placeholder="Any Amount"
+                           th:value="${selectedMinimumChapterCount}">
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ================================= -->
+            <!-- FILTER ACTIONS -->
+            <!-- ================================= -->
+
+            <div class="filter-actions">
+
+
+                <a th:href="@{/search}"
+                   class="reset-button">
+
+                    <i class="fa-solid fa-rotate-left"></i>
+
+                    Reset
+
+                </a>
+
+
+                <button class="apply-button"
+                        type="submit">
+
+                    <i class="fa-solid fa-filter"></i>
+
+                    Apply Filters
+
+                </button>
+
+
+            </div>
+
+
+        </form>
+
+
+    </section>
+
+
+
+    <!-- ========================================= -->
+    <!-- RESULTS HEADER -->
+    <!-- ========================================= -->
+
+    <section class="results-heading">
+
+
+        <div>
+
+            <h2>
+                Results
+            </h2>
+
+
+            <p th:if="${keyword != null and !keyword.isBlank()}">
+
+                Showing results for
+
+                <strong th:text="'&quot;' + ${keyword} + '&quot;'">
+                    "solo"
+                </strong>
+
+            </p>
+
+        </div>
+
+
+        <span class="result-count">
+
+            <span th:text="${resultCount}">
+                0
+            </span>
+
+            results
+
+        </span>
+
+
+    </section>
+
+
+
+    <!-- ========================================= -->
+    <!-- RESULTS -->
+    <!-- ========================================= -->
+
+    <section class="search-results"
+             th:if="${searchResults != null and !searchResults.isEmpty()}">
+
+
+        <a class="search-result-card"
+           th:each="manga : ${searchResults}"
+           th:href="@{/manga/{id}(id=${manga.id})}">
+
+
+            <!-- ================================= -->
+            <!-- COVER -->
+            <!-- ================================= -->
+
+            <div class="result-cover">
+
+                <img th:src="${manga.coverImage}"
+                     th:alt="${manga.title}">
+
+            </div>
+
+
+
+            <!-- ================================= -->
+            <!-- DETAILS -->
+            <!-- ================================= -->
+
+            <div class="result-details">
+
+
+                <!-- ================================= -->
+                <!-- TITLE + STATUS -->
+                <!-- ================================= -->
+
+                <div class="result-title-row">
+
+
+                    <h3 th:text="${manga.title}">
+                        Manga Title
+                    </h3>
+
+
+                    <span class="result-status"
+                          th:if="${manga.status != null}"
+                          th:text="${manga.status}">
+                        ONGOING
+                    </span>
+
+
+                </div>
+
+
+
+                <!-- ================================= -->
+                <!-- META -->
+                <!-- ================================= -->
+
+                <div class="result-meta">
+
+
+                    <!-- AUTHOR -->
+
+                    <span>
+
+                        <i class="fa-solid fa-user-pen"></i>
+
+                        <span th:text="${manga.author != null and !manga.author.isBlank()
+                                ? manga.author
+                                : 'Unknown Author'}">
+                            Author
+                        </span>
+
+                    </span>
+
+
+
+                    <!-- ARTIST -->
+
+                    <span>
+
+                        <i class="fa-solid fa-palette"></i>
+
+                        <span th:text="${manga.artist != null and !manga.artist.isBlank()
+                                ? manga.artist
+                                : 'Unknown Artist'}">
+                            Artist
+                        </span>
+
+                    </span>
+
+
+
+                    <!-- TYPE -->
+
+                    <span th:if="${manga.type != null and !manga.type.isBlank()}">
+
+                        <i class="fa-solid fa-book"></i>
+
+                        <span th:text="${manga.type}">
+                            MANGA
+                        </span>
+
+                    </span>
+
+
+
+                    <!-- RELEASE YEAR -->
+
+                    <span th:if="${manga.releaseYear != null}">
+
+                        <i class="fa-solid fa-calendar"></i>
+
+                        <span th:text="${manga.releaseYear}">
+                            2026
+                        </span>
+
+                    </span>
+
+
+                </div>
+
+
+
+                <!-- ================================= -->
+                <!-- GENRES -->
+                <!-- ================================= -->
+
+                <div class="result-classifications"
+                     th:if="${manga.genres != null and !manga.genres.isEmpty()}">
+
+                    <span class="result-pill"
+                          th:each="genre : ${manga.genres}"
+                          th:text="${genre.name}">
+
+                        Action
+
+                    </span>
+
+                </div>
+
+
+
+                <!-- ================================= -->
+                <!-- TAGS -->
+                <!-- ================================= -->
+
+                <div class="result-classifications tags"
+                     th:if="${manga.tags != null and !manga.tags.isEmpty()}">
+
+                    <span class="result-pill tag-pill"
+                          th:each="tag : ${manga.tags}"
+                          th:text="${tag.name}">
+
+                        Magic
+
+                    </span>
+
+                </div>
+
+
+
+                <!-- ================================= -->
+                <!-- DESCRIPTION -->
+                <!-- ================================= -->
+
+                <p class="result-description"
+                   th:text="${manga.description != null and !manga.description.isBlank()
+                           ? manga.description
+                           : 'No description available.'}">
+
+                    Manga description
+
+                </p>
+
+
+            </div>
+
+
+
+            <!-- ================================= -->
+            <!-- ARROW -->
+            <!-- ================================= -->
+
+            <div class="result-arrow">
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </div>
+
+
+        </a>
+
+
+    </section>
+
+
+
+    <!-- ========================================= -->
+    <!-- NO RESULTS -->
+    <!-- ========================================= -->
+
+    <section class="no-results"
+             th:if="${searchResults == null or searchResults.isEmpty()}">
+
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+
+        <h2>
+            No manga found
+        </h2>
+
+
+        <p>
+            Try another keyword or change your filters.
+        </p>
+
+
+    </section>
+
+
+</main>
+
+
+</body>
+
+</html>
