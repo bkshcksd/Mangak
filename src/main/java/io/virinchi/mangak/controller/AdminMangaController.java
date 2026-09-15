@@ -188,9 +188,23 @@ public class AdminMangaController {
                         .getAllTags();
 
 
+        // =========================================
+        // ADD SELECTED MANGA
+        // =========================================
+
         model.addAttribute(
                 "manga",
                 manga
+        );
+
+
+        // =========================================
+        // ADD ALL MANGA FOR SELECTOR
+        // =========================================
+
+        model.addAttribute(
+                "mangaList",
+                getOrderedManga()
         );
 
 

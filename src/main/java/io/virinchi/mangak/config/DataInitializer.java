@@ -164,11 +164,6 @@ public class DataInitializer implements CommandLineRunner {
                 "/images/solo.jpg"
         );
 
-
-        /* =====================================
-           ADD TEMPORARY CHAPTERS
-        ===================================== */
-
         List<Manga> mangaList = mangaService.getAllManga();
 
         for (Manga manga : mangaList) {
@@ -195,11 +190,6 @@ public class DataInitializer implements CommandLineRunner {
             );
         }
     }
-
-
-    /* =====================================
-       ADD MANGA
-    ===================================== */
 
     private void addManga(
             String title,

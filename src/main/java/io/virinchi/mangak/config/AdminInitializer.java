@@ -71,13 +71,9 @@ public class AdminInitializer implements CommandLineRunner {
                 true
         );
 
-
-        // registerUser() automatically hashes
-        // the password using BCrypt
         userService.registerUser(
                 admin
         );
-
 
         System.out.println(
                 "Default admin account created."

@@ -16,11 +16,6 @@ public class AdminInterceptor implements HandlerInterceptor {
         HttpSession session =
                 request.getSession(false);
 
-
-        // =========================================
-        // USER NOT LOGGED IN
-        // =========================================
-
         if (session == null ||
                 session.getAttribute("userId") == null) {
 
@@ -28,11 +23,6 @@ public class AdminInterceptor implements HandlerInterceptor {
 
             return false;
         }
-
-
-        // =========================================
-        // CHECK ADMIN ROLE
-        // =========================================
 
         Object roleObject =
                 session.getAttribute("role");
@@ -47,12 +37,6 @@ public class AdminInterceptor implements HandlerInterceptor {
 
             return false;
         }
-
-
-        // =========================================
-        // ADMIN ALLOWED
-        // =========================================
-
         return true;
     }
 }

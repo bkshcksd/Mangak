@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 
@@ -20,6 +20,7 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
 </head>
 
 
@@ -503,8 +504,11 @@
 </script>
 
 
+    <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 
 </html>
+
+
 
 

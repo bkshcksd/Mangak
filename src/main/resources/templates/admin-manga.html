@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 
@@ -13,30 +13,25 @@
         Manga Admin
     </title>
 
-
     <link rel="stylesheet"
           th:href="@{/css/globals.css}">
-
 
     <link rel="stylesheet"
           th:href="@{/css/admin-manga.css}">
 
-
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
 </head>
 
-
 <body>
-
 
 <!-- ========================================= -->
 <!-- NAVBAR -->
 <!-- ========================================= -->
 
 <header class="admin-navbar">
-
 
     <div class="logo">
 
@@ -49,22 +44,17 @@
 
     <div class="admin-navbar-right">
 
-
         <a th:href="@{/manga/{id}(id=${manga.id})}">
             View Manga
         </a>
-
 
         <span th:text="${username}">
             Username
         </span>
 
-
     </div>
 
-
 </header>
-
 
 
 <!-- ========================================= -->
@@ -91,15 +81,42 @@
         </a>
 
 
-        <div class="admin-title">
+        <!-- ================================= -->
+        <!-- MANGA SELECTOR -->
+        <!-- ================================= -->
 
+        <div class="manga-selector">
+
+            <label for="mangaSelect">
+                Select Manga
+            </label>
+
+            <select id="mangaSelect"
+                    onchange="window.location.href=this.value">
+
+                <option
+                        th:each="item, stat : ${mangaList}"
+                        th:value="@{/admin/manga/{number}(number=${stat.index + 1})}"
+                        th:text="${item.title}"
+                        th:selected="${item.id == manga.id}">
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- ================================= -->
+        <!-- MANGA HEADER -->
+        <!-- ================================= -->
+
+        <div class="admin-title">
 
             <img th:src="${manga.coverImage}"
                  th:alt="${manga.title}">
 
 
             <div>
-
 
                 <p class="admin-label">
                     Manga Manager
@@ -116,9 +133,7 @@
                     genres, tags, chapters and chapter pages.
                 </p>
 
-
             </div>
-
 
         </div>
 
@@ -136,13 +151,11 @@
 
         <div class="panel-heading">
 
-
             <div>
 
                 <h2>
                     Manga Information
                 </h2>
-
 
                 <p>
                     Edit the details shown on
@@ -154,8 +167,8 @@
 
             <i class="fa-solid fa-pen-to-square"></i>
 
-
         </div>
+
 
 
         <form class="manga-form"
@@ -238,30 +251,25 @@
                 <select id="status"
                         name="status">
 
-
                     <option value="ONGOING"
                             th:selected="${manga.status == 'ONGOING'}">
                         Ongoing
                     </option>
-
 
                     <option value="COMPLETED"
                             th:selected="${manga.status == 'COMPLETED'}">
                         Completed
                     </option>
 
-
                     <option value="HIATUS"
                             th:selected="${manga.status == 'HIATUS'}">
                         Hiatus
                     </option>
 
-
                     <option value="CANCELLED"
                             th:selected="${manga.status == 'CANCELLED'}">
                         Cancelled
                     </option>
-
 
                 </select>
 
@@ -283,47 +291,39 @@
                 <select id="demographic"
                         name="demographic">
 
-
                     <option value="">
                         Select Demographic
                     </option>
-
 
                     <option value="SHOUNEN"
                             th:selected="${manga.demographic == 'SHOUNEN'}">
                         Shounen
                     </option>
 
-
                     <option value="SEINEN"
                             th:selected="${manga.demographic == 'SEINEN'}">
                         Seinen
                     </option>
-
 
                     <option value="SHOUJO"
                             th:selected="${manga.demographic == 'SHOUJO'}">
                         Shoujo
                     </option>
 
-
                     <option value="JOSEI"
                             th:selected="${manga.demographic == 'JOSEI'}">
                         Josei
                     </option>
-
 
                     <option value="KODOMO"
                             th:selected="${manga.demographic == 'KODOMO'}">
                         Kodomo
                     </option>
 
-
                     <option value="GENERAL"
                             th:selected="${manga.demographic == 'GENERAL'}">
                         General
                     </option>
-
 
                 </select>
 
@@ -345,35 +345,29 @@
                 <select id="type"
                         name="type">
 
-
                     <option value="">
                         Select Type
                     </option>
-
 
                     <option value="MANGA"
                             th:selected="${manga.type == 'MANGA'}">
                         Manga
                     </option>
 
-
                     <option value="MANHWA"
                             th:selected="${manga.type == 'MANHWA'}">
                         Manhwa
                     </option>
-
 
                     <option value="MANHUA"
                             th:selected="${manga.type == 'MANHUA'}">
                         Manhua
                     </option>
 
-
                     <option value="WEBTOON"
                             th:selected="${manga.type == 'WEBTOON'}">
                         Webtoon
                     </option>
-
 
                 </select>
 
@@ -417,24 +411,19 @@
 
                 <div class="checkbox-grid">
 
-
                     <label class="checkbox-item"
                            th:each="genre : ${genres}">
-
 
                         <input type="checkbox"
                                name="genreIds"
                                th:value="${genre.id}"
                                th:checked="${manga.genres.contains(genre)}">
 
-
                         <span th:text="${genre.name}">
                             Action
                         </span>
 
-
                     </label>
-
 
                 </div>
 
@@ -463,24 +452,19 @@
 
                 <div class="checkbox-grid">
 
-
                     <label class="checkbox-item"
                            th:each="tag : ${tags}">
-
 
                         <input type="checkbox"
                                name="tagIds"
                                th:value="${tag.id}"
                                th:checked="${manga.tags.contains(tag)}">
 
-
                         <span th:text="${tag.name}">
                             Magic
                         </span>
 
-
                     </label>
-
 
                 </div>
 
@@ -523,7 +507,6 @@
 
             <div class="form-actions full-width">
 
-
                 <button class="save-button"
                         type="submit">
 
@@ -532,7 +515,6 @@
                     Save Changes
 
                 </button>
-
 
             </div>
 
@@ -553,13 +535,11 @@
 
         <div class="panel-heading">
 
-
             <div>
 
                 <h2>
                     Chapters
                 </h2>
-
 
                 <p>
                     Add, edit, delete and
@@ -576,7 +556,6 @@
 
             </span>
 
-
         </div>
 
 
@@ -588,12 +567,9 @@
         <div class="warning-message"
              th:if="${param.chapterExists}">
 
-
             <i class="fa-solid fa-triangle-exclamation"></i>
 
-
             A chapter with that number already exists.
-
 
         </div>
 
@@ -605,7 +581,6 @@
 
         <div class="add-chapter">
 
-
             <h3>
                 Add Chapter
             </h3>
@@ -616,7 +591,6 @@
 
 
                 <div class="chapter-add-field">
-
 
                     <label for="newChapterNumber">
                         Chapter Number
@@ -630,12 +604,11 @@
                            placeholder="1"
                            required>
 
-
                 </div>
 
 
-                <div class="chapter-add-field chapter-title-input">
 
+                <div class="chapter-add-field chapter-title-input">
 
                     <label for="newChapterTitle">
                         Chapter Title
@@ -648,24 +621,21 @@
                            placeholder="Chapter 1"
                            required>
 
-
                 </div>
+
 
 
                 <button class="add-button"
                         type="submit">
 
-
                     <i class="fa-solid fa-plus"></i>
 
                     Add Chapter
-
 
                 </button>
 
 
             </form>
-
 
         </div>
 
@@ -690,7 +660,6 @@
 
                     <div class="chapter-number-field">
 
-
                         <label>
                             Chapter
                         </label>
@@ -702,13 +671,11 @@
                                th:value="${chapter.chapterNumber}"
                                required>
 
-
                     </div>
 
 
 
                     <div class="chapter-title-field">
-
 
                         <label>
                             Title
@@ -720,7 +687,6 @@
                                th:value="${chapter.title}"
                                required>
 
-
                     </div>
 
 
@@ -728,11 +694,9 @@
                     <button class="small-button edit-button"
                             type="submit">
 
-
                         <i class="fa-solid fa-floppy-disk"></i>
 
                         Save
-
 
                     </button>
 
@@ -751,11 +715,9 @@
                     <a class="small-button read-button"
                        th:href="@{/chapter/{id}(id=${chapter.id})}">
 
-
                         <i class="fa-solid fa-book-open"></i>
 
                         Read
-
 
                     </a>
 
@@ -764,11 +726,9 @@
                     <a class="small-button pages-button"
                        th:href="@{/admin/chapter/{id}/pages(id=${chapter.id})}">
 
-
                         <i class="fa-regular fa-images"></i>
 
                         Manage Pages
-
 
                     </a>
 
@@ -778,18 +738,14 @@
                           method="post"
                           onsubmit="return confirm('Delete this chapter?');">
 
-
                         <button class="small-button delete-chapter-button"
                                 type="submit">
-
 
                             <i class="fa-solid fa-trash"></i>
 
                             Delete
 
-
                         </button>
-
 
                     </form>
 
@@ -811,20 +767,16 @@
         <div class="no-chapters"
              th:if="${chapters.isEmpty()}">
 
-
             <i class="fa-solid fa-book"></i>
-
 
             <h3>
                 No chapters yet
             </h3>
 
-
             <p>
                 Add the first chapter using
                 the form above.
             </p>
-
 
         </div>
 
@@ -842,18 +794,16 @@
 
         <div>
 
-
             <h2>
                 Danger Zone
             </h2>
-
 
             <p>
                 Permanently delete this manga.
             </p>
 
-
         </div>
+
 
 
         <form th:action="@{/admin/manga/{id}/delete(id=${adminNumber})}"
@@ -864,11 +814,9 @@
             <button type="submit"
                     class="delete-manga-button">
 
-
                 <i class="fa-solid fa-trash"></i>
 
                 Delete Manga
-
 
             </button>
 
@@ -882,6 +830,8 @@
 </main>
 
 
+    <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 
 </html>
+
