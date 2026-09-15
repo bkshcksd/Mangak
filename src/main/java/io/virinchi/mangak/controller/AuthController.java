@@ -150,31 +150,20 @@ public class AuthController {
                 "userId",
                 user.getId()
         );
-
-
         session.setAttribute(
                 "username",
                 user.getUsername()
         );
-
-
         session.setAttribute(
                 "role",
                 user.getRole()
         );
-
-
-        // =========================================
-        // ADMIN LOGIN
-        // =========================================
-
         if ("ADMIN".equalsIgnoreCase(
                 user.getRole()
         )) {
 
             return "redirect:/admin/manga/1";
         }
-
 
         // =========================================
         // NORMAL USER LOGIN
