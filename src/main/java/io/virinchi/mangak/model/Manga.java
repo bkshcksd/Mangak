@@ -12,35 +12,25 @@ public class Manga {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-
     @Column(nullable = false)
     private String title;
-
 
     @Column(length = 1000)
     private String description;
 
-
     private String coverImage;
-
 
     private String status;
 
-
     private String author;
 
-
     private String artist;
-
-
     // =========================================
     // DEMOGRAPHIC
     // =========================================
 
     @Column(length = 50)
     private String demographic;
-
 
     // =========================================
     // TYPE
