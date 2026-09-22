@@ -22,11 +22,6 @@ public class ReadingHistoryController {
                 readingHistoryService;
     }
 
-
-    // =========================================
-    // READING HISTORY PAGE
-    // =========================================
-
     @GetMapping("/reading-history")
     public String readingHistory(
             HttpSession session,
@@ -67,11 +62,6 @@ public class ReadingHistoryController {
 
         return "reading-history";
     }
-
-
-    // =========================================
-    // REMOVE ONE HISTORY ITEM
-    // =========================================
 
     @PostMapping("/reading-history/remove/{mangaId}")
     public String removeHistory(

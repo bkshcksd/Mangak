@@ -19,22 +19,12 @@ public class ReadingHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    // =========================================
-    // USER
-    // =========================================
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "user_id",
             nullable = false
     )
     private User user;
-
-
-    // =========================================
-    // MANGA
-    // =========================================
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
@@ -43,11 +33,6 @@ public class ReadingHistory {
     )
     private Manga manga;
 
-
-    // =========================================
-    // LAST CHAPTER
-    // =========================================
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "chapter_id",
@@ -55,21 +40,11 @@ public class ReadingHistory {
     )
     private Chapter chapter;
 
-
-    // =========================================
-    // LAST READ TIME
-    // =========================================
-
     @Column(
             name = "last_read_at",
             nullable = false
     )
     private LocalDateTime lastReadAt;
-
-
-    // =========================================
-    // CONSTRUCTOR
-    // =========================================
 
     public ReadingHistory() {
     }
@@ -86,11 +61,6 @@ public class ReadingHistory {
         this.chapter = chapter;
         this.lastReadAt = LocalDateTime.now();
     }
-
-
-    // =========================================
-    // GETTERS AND SETTERS
-    // =========================================
 
     public Long getId() {
         return id;
