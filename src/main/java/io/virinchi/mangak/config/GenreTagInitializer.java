@@ -26,10 +26,6 @@ public class GenreTagInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        // =========================================
-        // GENRES
-        // =========================================
-
         String[] genres = {
                 "Action",
                 "Adventure",

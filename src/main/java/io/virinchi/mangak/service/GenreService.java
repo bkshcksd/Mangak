@@ -19,30 +19,15 @@ public class GenreService {
         this.genreRepository = genreRepository;
     }
 
-
-    // =========================================
-    // GET ALL GENRES
-    // =========================================
-
     public List<Genre> getAllGenres() {
         return genreRepository.findAll();
     }
-
-
-    // =========================================
-    // GET GENRE BY ID
-    // =========================================
 
     public Optional<Genre> getGenreById(
             Long id
     ) {
         return genreRepository.findById(id);
     }
-
-
-    // =========================================
-    // GET GENRE BY NAME
-    // =========================================
 
     public Optional<Genre> getGenreByName(
             String name
@@ -61,21 +46,11 @@ public class GenreService {
         return genreRepository.save(genre);
     }
 
-
-    // =========================================
-    // DELETE GENRE
-    // =========================================
-
     public void deleteGenre(
             Long id
     ) {
         genreRepository.deleteById(id);
     }
-
-
-    // =========================================
-    // CHECK IF GENRE EXISTS
-    // =========================================
 
     public boolean existsByName(
             String name

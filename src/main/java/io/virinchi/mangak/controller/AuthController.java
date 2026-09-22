@@ -23,11 +23,6 @@ public class AuthController {
         this.emailService = emailService;
     }
 
-
-    // =========================================
-    // ROOT PAGE
-    // =========================================
-
     @GetMapping("/")
     public String rootPage(
             HttpSession session
@@ -54,11 +49,6 @@ public class AuthController {
 
         return "redirect:/login";
     }
-
-
-    // =========================================
-    // LOGIN PAGE
-    // =========================================
 
     @GetMapping("/login")
     public String loginPage(
@@ -89,11 +79,6 @@ public class AuthController {
         return "login";
     }
 
-
-    // =========================================
-    // LOGIN
-    // =========================================
-
     @PostMapping("/login")
     public String login(
             @RequestParam String username,
@@ -108,11 +93,6 @@ public class AuthController {
                         )
                         .orElse(null);
 
-
-        // =========================================
-        // USER NOT FOUND
-        // =========================================
-
         if (user == null) {
 
             model.addAttribute(
@@ -122,11 +102,6 @@ public class AuthController {
 
             return "login";
         }
-
-
-        // =========================================
-        // CHECK PASSWORD
-        // =========================================
 
         if (!userService.checkPassword(
                 password,
@@ -140,11 +115,6 @@ public class AuthController {
 
             return "login";
         }
-
-
-        // =========================================
-        // CREATE LOGIN SESSION
-        // =========================================
 
         session.setAttribute(
                 "userId",
@@ -165,17 +135,8 @@ public class AuthController {
             return "redirect:/admin/manga/1";
         }
 
-        // =========================================
-        // NORMAL USER LOGIN
-        // =========================================
-
         return "redirect:/mangak";
     }
-
-
-    // =========================================
-    // SIGNUP PAGE
-    // =========================================
 
     @GetMapping("/signup")
     public String signupPage(
@@ -206,11 +167,6 @@ public class AuthController {
         return "signup";
     }
 
-
-    // =========================================
-    // SIGNUP
-    // =========================================
-
     @PostMapping("/signup")
     public String signup(
             @RequestParam String username,
@@ -219,11 +175,6 @@ public class AuthController {
             @RequestParam String confirmPassword,
             Model model
     ) {
-
-
-        // =========================================
-        // CHECK EMPTY VALUES
-        // =========================================
 
         if (username == null ||
                 username.trim().isEmpty() ||
@@ -240,11 +191,6 @@ public class AuthController {
             return "signup";
         }
 
-
-        // =========================================
-        // CHECK PASSWORD MATCH
-        // =========================================
-
         if (!password.equals(
                 confirmPassword
         )) {
@@ -257,11 +203,6 @@ public class AuthController {
             return "signup";
         }
 
-
-        // =========================================
-        // CHECK USERNAME
-        // =========================================
-
         if (userService.usernameExists(
                 username.trim()
         )) {
@@ -273,11 +214,6 @@ public class AuthController {
 
             return "signup";
         }
-
-
-        // =========================================
-        // CHECK EMAIL
-        // =========================================
 
         if (userService.emailExists(
                 email.trim()
@@ -351,11 +287,6 @@ public class AuthController {
                 user
         );
 
-
-        // =========================================
-        // SEND SMTP WELCOME EMAIL
-        // =========================================
-
         try {
 
             emailService.sendWelcomeEmail(
@@ -371,18 +302,8 @@ public class AuthController {
             );
         }
 
-
-        // =========================================
-        // SIGNUP SUCCESS
-        // =========================================
-
         return "redirect:/login";
     }
-
-
-    // =========================================
-    // LOGOUT
-    // =========================================
 
     @GetMapping("/logout")
     public String logout(

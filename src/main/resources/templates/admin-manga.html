@@ -22,10 +22,14 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet"
+          th:href="@{/css/footer.css}">
+
 </head>
 
+
 <body>
+
 
 <!-- ========================================= -->
 <!-- NAVBAR -->
@@ -44,9 +48,12 @@
 
     <div class="admin-navbar-right">
 
-        <a th:href="@{/manga/{id}(id=${manga.id})}">
-            View Manga
+        <!-- VIEW API -->
+
+        <a th:href="@{/api/manga}">
+            View API
         </a>
+
 
         <span th:text="${username}">
             Username
@@ -55,6 +62,7 @@
     </div>
 
 </header>
+
 
 
 <!-- ========================================= -->
@@ -81,6 +89,7 @@
         </a>
 
 
+
         <!-- ================================= -->
         <!-- MANGA SELECTOR -->
         <!-- ================================= -->
@@ -90,6 +99,7 @@
             <label for="mangaSelect">
                 Select Manga
             </label>
+
 
             <select id="mangaSelect"
                     onchange="window.location.href=this.value">
@@ -104,6 +114,7 @@
             </select>
 
         </div>
+
 
 
         <!-- ================================= -->
@@ -830,8 +841,14 @@
 </main>
 
 
-    <div th:replace="~{fragments/footer :: footer}"></div>
+
+<!-- ========================================= -->
+<!-- FOOTER -->
+<!-- ========================================= -->
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+
 </body>
 
 </html>
-

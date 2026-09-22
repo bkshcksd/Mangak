@@ -18,11 +18,6 @@ public class EmailService {
         this.mailSender = mailSender;
     }
 
-
-    // =========================================
-    // SEND WELCOME EMAIL
-    // =========================================
-
     public void sendWelcomeEmail(
             String toEmail,
             String username

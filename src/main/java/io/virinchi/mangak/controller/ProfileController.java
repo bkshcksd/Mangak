@@ -21,11 +21,6 @@ public class ProfileController {
         this.userRepository = userRepository;
     }
 
-
-    // =========================================
-    // PROFILE PAGE
-    // =========================================
-
     @GetMapping("/profile")
     public String profile(
             HttpSession session,

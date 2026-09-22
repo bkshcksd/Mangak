@@ -18,11 +18,6 @@ public class AdminInitializer implements CommandLineRunner {
         this.userService = userService;
     }
 
-
-    // =========================================
-    // CREATE DEFAULT ADMIN
-    // =========================================
-
     @Override
     public void run(
             String... args
@@ -37,11 +32,6 @@ public class AdminInitializer implements CommandLineRunner {
 
             return;
         }
-
-
-        // =========================================
-        // CREATE ADMIN USER
-        // =========================================
 
         User admin =
                 new User();

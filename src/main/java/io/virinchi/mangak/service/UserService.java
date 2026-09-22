@@ -23,20 +23,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-
-    // =========================================
-    // GET ALL USERS
-    // =========================================
-
     public List<User> getAllUsers() {
 
         return userRepository.findAll();
     }
-
-
-    // =========================================
-    // GET USER BY ID
-    // =========================================
 
     public Optional<User> getUserById(
             Long id
@@ -47,11 +37,6 @@ public class UserService {
         );
     }
 
-
-    // =========================================
-    // FIND USER BY USERNAME
-    // =========================================
-
     public Optional<User> findByUsername(
             String username
     ) {
@@ -60,11 +45,6 @@ public class UserService {
                 username
         );
     }
-
-
-    // =========================================
-    // FIND USER BY EMAIL
-    // =========================================
 
     public Optional<User> findByEmail(
             String email
@@ -75,11 +55,6 @@ public class UserService {
         );
     }
 
-
-    // =========================================
-    // CHECK USERNAME EXISTS
-    // =========================================
-
     public boolean usernameExists(
             String username
     ) {
@@ -89,11 +64,6 @@ public class UserService {
         );
     }
 
-
-    // =========================================
-    // CHECK EMAIL EXISTS
-    // =========================================
-
     public boolean emailExists(
             String email
     ) {
@@ -102,11 +72,6 @@ public class UserService {
                 email
         );
     }
-
-
-    // =========================================
-    // REGISTER NEW USER
-    // =========================================
 
     public User registerUser(
             User user
@@ -127,11 +92,6 @@ public class UserService {
                 user
         );
     }
-
-
-    // =========================================
-    // CHECK PASSWORD
-    // =========================================
 
     public boolean checkPassword(
             String rawPassword,
@@ -157,11 +117,6 @@ public class UserService {
                 user
         );
     }
-
-
-    // =========================================
-    // DELETE USER
-    // =========================================
 
     public void deleteUser(
             Long id
